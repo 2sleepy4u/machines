@@ -1,31 +1,23 @@
 { lib, config, pkgs, ... }:
 
+
 {
     imports =
-        [ # Include the results of the hardware scan.
+        [ 
         ./hardware-configuration.nix
-        #./vfio-gaming.nix
         ];
+
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.systemd-boot.configurationLimit = 3;
     boot.loader.efi.canTouchEfiVariables = true;
     boot.initrd.kernelModules = [ "amdgpu" ];
     boot.supportedFilesystems = [ "ntfs" "hfs+" "hfsplus"];
-    #boot.extraModprobeConfig = '' options snd slots=snd-hda-ati '';
 
-	/*
-    nixpkgs.config.permittedInsecurePackages = [ "nix-2.16.2" ];
-
-    services.postgresql = {
-	    enable = true;
-	    enableTCPIP = true;
-    authentication = pkgs.lib.mkOverride 10 ''
-      local all       all     trust
-      host  all all 0.0.0.0/0 trust
-    '';
-    };
-	*/
+	xdg.portal = {
+		enable = true;
+		extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+	};
 
     networking.hostName = "sleeper"; 
     networking.networkmanager.enable = true;  
@@ -50,13 +42,18 @@
 
     time.timeZone = "Europe/Rome";
 
-	nix.settings.experimental-features = ["nix-command" "flakes"];
-	nixpkgs.config.allowUnfree = true;
+    nix.settings.experimental-features = ["nix-command" "flakes"];
+    nixpkgs.config.allowUnfree = true;
     nixpkgs.config.pulseaudio = true;
 
-	programs.kdeconnect.enable = true;
-	programs.hyprland.enable = true;
+    programs.gamemode.enable = true;
+    programs.steam.enable = true;
+    programs.steam.gamescopeSession.enable = true;
+	programs.steam.extraCompatPackages = with pkgs; [ proton-ge-bin ];
+    programs.kdeconnect.enable = true;
+    programs.hyprland.enable = true;
 
+    hardware.opengl.enable = true;
     hardware.opengl.driSupport = true;
     hardware.opengl.driSupport32Bit = true;
     hardware.enableAllFirmware = true;
@@ -75,17 +72,11 @@
 		fira-code-symbols
 		(nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
     ];
-    #specialisation."VFIO".configuration = {
-        #system.nixos.tags = [ "with-vfio" ];
-        #services.vfio-gaming = {
-        #    enable = true;
-        #    gpuIDs = ["1002:1478" "1002:1479" "1002:73ef" "1002:ab28"];
-        #    #gpuIDs = ["1002:73ef"  "1002:ab28" ];
-        #};
-    #};
 
-
-
+	services.usbmuxd = {
+		enable = true;
+		package = pkgs.usbmuxd2;
+	};
     services.printing.enable = true;
     services.avahi.enable = true;
     services.avahi.nssmdns4 = true;
@@ -97,40 +88,43 @@
 	services.xserver.enable = true;
 	services.displayManager.sddm.enable = true;
 	services.displayManager.sddm.theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
-	#services.xserver.videoDrivers = [ "amdgpu" ];
-
-	services.ollama = {
-		enable = true;
-	};
+	services.xserver.videoDrivers = [ "amdgpu" ];
 
 	# This variable fixes electron apps in wayland
 	#environment.sessionVariables.NIXOS_OZONE_WL = "1"; 
 	#environment.variables.EDITOR = "neovim";
 
-	security.pam.services.swaylock = {
-		text = ''
-		auth Include login
-		'';
-	};
-
+	security.pam.services.swaylock.text = ''auth Include login '';
 
     users.users.im2sleepy = {
         isNormalUser = true;
         initialPassword = "123";
-        extraGroups = [ "wheel" "libvirtd" "audio" "networkmanager" "postgres"];
+        extraGroups = [ "wheel" "libvirtd" "audio" "networkmanager" "dialout" "usb"];
         packages = with pkgs; [
+			figma-linux
+			lldb
             cargo
             gh
 			gcc
 			#VFIO
 			pciutils
 			tree
-			pgadmin4
+			#pgadmin4
+			ripgrep
+			usbutils
+					#iOS
+		usbmuxd
+		libusbmuxd
+		libimobiledevice
+		ifuse
+
+
         ];
     };
 
-# $ nix search wget
     environment.systemPackages = with pkgs; [
+		#(import ./skeep.nix)
+		parted
         wget
         efibootmgr
         amdvlk
@@ -142,6 +136,7 @@
         lsof
 		libsForQt5.qt5.qtquickcontrols2
 		libsForQt5.qt5.qtgraphicaleffects
+		xdg-desktop-portal-gtk
     ];
 
 # Copy the NixOS configuration file and link it from the resulting system

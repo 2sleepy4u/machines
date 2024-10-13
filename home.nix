@@ -23,10 +23,11 @@ in
 		./nvim.nix
 	];
 
-    	home.stateVersion = "23.11";
+	home.stateVersion = "23.11";
 	home.sessionVariables = {
 		NIXOS_OZONE_WL = "1";
 		EDITOR = "nvim";
+		#STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
 	};
 	programs.home-manager.enable = true;
 
@@ -49,6 +50,12 @@ in
 			action = "sleep 1; reboot";
 			text = "Reboot";
 			keybind = "r";
+		}
+		{
+			label = "shutdown";
+			action = "sleep 1; poweroff";
+			text = "Shutdown";
+			keybind = "s";
 		}
 		{
 			label = "lock";
@@ -76,6 +83,7 @@ in
 	home.packages = with pkgs; [
 		#programs
 		brave
+		firefox
 		spotify
 		discord
 
@@ -86,8 +94,8 @@ in
 		#yt-dlp
 
 		#iOS
-		usbmuxd
-		libusbmuxd
+		#usbmuxd
+		#libusbmuxd
 
 		#custom
 		gnome.nautilus
@@ -95,6 +103,7 @@ in
 		dunst
 		pavucontrol
 		blueberry
+		networkmanagerapplet
 		cliphist
 		wl-clipboard
 		grim
@@ -107,6 +116,11 @@ in
 		#swaybg
 		swaylock-effects
 		wofi
+		prismlauncher
+
+		#gaming
+		protonup
+		mangohud
 	];
 	gtk = {
 		enable = true;
