@@ -87,7 +87,7 @@
 
 	services.xserver.enable = true;
 	services.displayManager.sddm.enable = true;
-	services.displayManager.sddm.theme = "${import ../common/sddm-sugar-dark.nix { inherit pkgs; }}";
+	services.displayManager.sddm.theme = "${import ../themes/sddm-sugar-dark.nix { inherit pkgs; }}";
 	services.xserver.videoDrivers = [ "amdgpu" ];
 
 	# This variable fixes electron apps in wayland
