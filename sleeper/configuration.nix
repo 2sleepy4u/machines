@@ -87,7 +87,7 @@
 
 	services.xserver.enable = true;
 	services.displayManager.sddm.enable = true;
-	services.displayManager.sddm.theme = "${import ./sddm-theme.nix { inherit pkgs; }}";
+	services.displayManager.sddm.theme = "${import ../common/sddm-sugar-dark.nix { inherit pkgs; }}";
 	services.xserver.videoDrivers = [ "amdgpu" ];
 
 	# This variable fixes electron apps in wayland
@@ -113,17 +113,16 @@
 			ripgrep
 			usbutils
 					#iOS
-		usbmuxd
-		libusbmuxd
-		libimobiledevice
-		ifuse
+            usbmuxd
+            libusbmuxd
+            libimobiledevice
+            ifuse
 
 
         ];
     };
 
     environment.systemPackages = with pkgs; [
-		#(import ./skeep.nix)
 		parted
         wget
         efibootmgr
@@ -137,6 +136,13 @@
 		libsForQt5.qt5.qtquickcontrols2
 		libsForQt5.qt5.qtgraphicaleffects
 		xdg-desktop-portal-gtk
+        catppuccin-sddm.override {
+            flavor = "mocha";
+            font  = "Noto Sans";
+            fontSize = "9";
+            background = "${../pictures/eva02.png}";
+            loginBackground = true;
+        }
     ];
 
 # Copy the NixOS configuration file and link it from the resulting system

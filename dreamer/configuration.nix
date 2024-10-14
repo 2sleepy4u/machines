@@ -8,6 +8,9 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.systemd-boot.configurationLimit = 3;
     boot.loader.efi.canTouchEfiVariables = true;
+    #nix-shell -p pciutils --run "lspci -nn | grep VGA"
+    #to get device id [8086:<divice ID>]
+    #boot.kernelParams = [ "i915.force_probe=<device ID>" ];
     boot.supportedFilesystems = [ "ntfs" "hfs+" "hfsplus"];
 
 	xdg.portal = {
@@ -45,6 +48,7 @@
     programs.hyprland.enable = true;
 
     hardware.opengl.enable = true;
+    hardware.opengl.extraPackags = with pkgs; [ vpl-gpu-rt ];
     hardware.opengl.driSupport = true;
     hardware.opengl.driSupport32Bit = true;
     hardware.enableAllFirmware = true;
@@ -56,6 +60,7 @@
     i18n.defaultLocale = "it_IT.UTF-8";
     console = {
         font = "Lat2-Terminus16";
+        keyMap = "it";
         useXkbConfig = true; 
     };
     fonts.packages = with pkgs; [
@@ -106,6 +111,13 @@
 		libsForQt5.qt5.qtquickcontrols2
 		libsForQt5.qt5.qtgraphicaleffects
 		xdg-desktop-portal-gtk
+        catppuccin-sddm.override {
+            flavor = "mocha";
+            font  = "Noto Sans";
+            fontSize = "9";
+            background = "${../pictures/eva02.png}";
+            loginBackground = true;
+        }
     ];
 
 # Copy the NixOS configuration file and link it from the resulting system

@@ -49,10 +49,6 @@ in
 		pavucontrol
 		#yt-dlp
 
-		#iOS
-		#usbmuxd
-		#libusbmuxd
-
 		#custom
 		gnome.nautilus
 		dunst
