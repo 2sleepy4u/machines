@@ -6,10 +6,11 @@
         ./hardware-configuration.nix
         ];
 
+    boot.supportedFilesystems = [ "ntfs" "hfs+" "hfsplus"];
     #nix-shell -p pciutils --run "lspci -nn | grep VGA"
     #to get device id [8086:<divice ID>]
     #boot.kernelParams = [ "i915.force_probe=<device ID>" ];
-    boot.supportedFilesystems = [ "ntfs" "hfs+" "hfsplus"];
+    hardware.opengl.extraPackags = with pkgs; [ vpl-gpu-rt ];
 
     networking.hostName = "dreamer"; 
     networking.networkmanager.enable = true;  
