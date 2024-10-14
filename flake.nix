@@ -11,6 +11,7 @@
             url = "github:nix-community/home-manager/release-24.05";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     };
 
     outputs = { self, nixpkgs, home-manager, nixvim, ... }@inputs: {
@@ -39,6 +40,13 @@
                             home-manager.extraSpecialArgs = { inherit inputs; };
                             home-manager.users.im2sleepy = import ./dreamer/home.nix;
                         }
+                ];
+            }
+            dreamy-server = nixpkgs.lib.nixosSystem {
+                system = "x86_64-linux";
+                specialArgs = { nixvim = inputs.nixvim; };
+                modules = [
+                    ./server/configuration.nix
                 ];
             }
 
