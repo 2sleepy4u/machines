@@ -18,68 +18,24 @@ let
 in
 {
 	imports = [
-		#inputs.ags.homeManagerModules.default 
 		inputs.nixvim.homeManagerModules.nixvim
-		./nvim.nix
+		../common/nvim.nix
 	];
 
-	home.stateVersion = "23.11";
+	home.stateVersion = "24.05";
 	home.sessionVariables = {
 		NIXOS_OZONE_WL = "1";
 		EDITOR = "nvim";
-		#STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
 	};
 	programs.home-manager.enable = true;
 
 	programs.brave.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
 	programs.git = {
 		enable = true;
-		userName = "2sleepy4uu";
+		userName = "2sleepy4u";
 		userEmail = "riccardo.zancan00@gmail.com";
 	};
-	programs.wlogout = {
-		enable = true;
-		layout = [{
-			label = "logout";
-			action = "sleep 1; hyprctl dispatch exit";
-			text = "Logout";
-			keybind = "e";
-		}
-		{
-			label = "reboot";
-			action = "sleep 1; reboot";
-			text = "Reboot";
-			keybind = "r";
-		}
-		{
-			label = "shutdown";
-			action = "sleep 1; poweroff";
-			text = "Shutdown";
-			keybind = "s";
-		}
-		{
-			label = "lock";
-			action = "swaylock \
-					  --screenshots \
-					  --clock \
-					  --indicator \
-					  --indicator-radius 100 \
-					  --indicator-thickness 7 \
-					  --effect-blur 7x5 \
-					  --effect-vignette 0.5:0.5 \
-					  --ring-color bb00cc \
-					  --key-hl-color 880033 \
-					  --line-color 00000000 \
-					  --inside-color 00000088 \
-					  --separator-color 00000000 \
-					  --grace 0 \
-					  --fade-in 0.2";
-			text = "Lock";
-			keybind = "l";
-		}];
-	};
-
-
+	
 	home.packages = with pkgs; [
 		#programs
 		brave
@@ -99,7 +55,6 @@ in
 
 		#custom
 		gnome.nautilus
-		wlogout
 		dunst
 		pavucontrol
 		blueberry
@@ -114,13 +69,7 @@ in
 		waybar
 		playerctl
 		#swaybg
-		swaylock-effects
 		wofi
-		prismlauncher
-
-		#gaming
-		protonup
-		mangohud
 	];
 	gtk = {
 		enable = true;
@@ -147,6 +96,7 @@ in
 			ytdl-format="bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a]";
 		};
 	};
+
 	programs.waybar = {
 		enable = true;
 		systemd.enable = true;
