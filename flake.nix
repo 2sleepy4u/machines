@@ -11,7 +11,7 @@
             url = "github:nix-community/home-manager/release-24.05";
             inputs.nixpkgs.follows = "nixpkgs";
         };
-        inputs.nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+        nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     };
 
     outputs = { self, nixpkgs, home-manager, nixvim, ... }@inputs: {
