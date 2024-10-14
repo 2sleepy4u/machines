@@ -7,10 +7,14 @@
         ];
 
     boot.supportedFilesystems = [ "ntfs" "hfs+" "hfsplus"];
+    services.xserver.videoDrivers = [ "modesetting" ];
+    boot.kernelModules = [ "i915" ];
     #nix-shell -p pciutils --run "lspci -nn | grep VGA"
     #to get device id [8086:<divice ID>]
     #boot.kernelParams = [ "i915.force_probe=<device ID>" ];
     hardware.opengl.extraPackags = with pkgs; [ vpl-gpu-rt ];
+    #hardware.ipu6.enable = true;
+    #hardware.ipu6.platform = "ipu6epmtl";
 
     networking.hostName = "dreamer"; 
     networking.networkmanager.enable = true;  
