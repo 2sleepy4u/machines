@@ -41,15 +41,14 @@
                             home-manager.users.im2sleepy = import ./dreamer/home.nix;
                         }
                 ];
-            }
+            };
             dreamy-server = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 specialArgs = { nixvim = inputs.nixvim; };
                 modules = [
                     ./server/configuration.nix
                 ];
-            }
-
+            };
         };
     };
 }
