@@ -2,6 +2,7 @@
 {
 	imports = [
 		inputs.nixvim.homeManagerModules.nixvim
+		inputs.catppuccin.homeManagerModules.catppuccin
 		../common/nvim.nix
 		../common/mpv.nix
 		../common/gtk.nix
@@ -18,6 +19,12 @@
 	programs.home-manager.enable = true;
 
 	programs.brave.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
+	programs.alacritty.enable = true;
+	programs.alacritty.catppuccin.enable = true;
+	programs.alacritty.catppuccin.flavor = "mocha";
+	programs.alacritty.settings = {
+		window.opacity = 0.8;
+	};
 
 	home.packages = with pkgs; [
 		#programs

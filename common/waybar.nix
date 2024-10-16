@@ -24,12 +24,41 @@ in
 			height = 30;
 			modules-left = [ "hyprland/workspaces" ];
 			modules-right = [ 
+				"power-profiles_daemon"
+				"keyboard-state"
+				"temperature"
+				"battery"
 				"pulseaudio"
 				"custom/playerctl#backward" "custom/playerctl#play" "custom/playerctl#forward"
-				"custom/playerlabel" "bluetooth" "clock" ];
+				"custom/playerlabel" 
+				"bluetooth" 
+				"network"
+				"clock" ];
 			position = "bottom";
+			keyboard-state = {
+				capslock = true;
+				format = "{name} {icon}";
+					format-icons = {
+						locked = "";
+						unlocked = "";
+					};
+			};
+			battery = {
+				states = {
+					warning = 30;
+					critical = 15;
+				};
+				format = "{capacity} {icon}";
+				format-charging = "{capacity}% ";
+				format-icons = [""  "" "" "" ""];
+			};
 			pulseaudio = {
 				on-click = "pavucontrol";
+			};
+			network = {
+				format-wifi = "{essid} ({signalStrength}%) ";
+				format-ethernet = "{ipaddr}/{cidr} ";
+				format-disconnected = "Disconnected ⚠";
 			};
 			bluetooth = {
 				format = " {status}";

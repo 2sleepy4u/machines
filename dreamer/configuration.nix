@@ -6,22 +6,27 @@
         ./hardware-configuration.nix
         ];
 
+
     boot.supportedFilesystems = [ "ntfs" "hfs+" "hfsplus"];
     services.xserver.videoDrivers = [ "modesetting" ];
     boot.kernelModules = [ "i915" ];
     #nix-shell -p pciutils --run "lspci -nn | grep VGA"
     #to get device id [8086:<divice ID>]
-    #boot.kernelParams = [ "i915.force_probe=<device ID>" ];
-    hardware.opengl.extraPackags = with pkgs; [ vpl-gpu-rt ];
+    boot.kernelParams = [ "i915.force_probe=7d55" ];
+    hardware.opengl.extraPackages = with pkgs; [ onevpl-intel-gpu ];
     #hardware.ipu6.enable = true;
     #hardware.ipu6.platform = "ipu6epmtl";
 
+	services.displayManager.sddm = {
+		enable = true;
+		theme = "catppuccin-mocha";
+		package = pkgs.kdePackages.sddm;
+	};
     networking.hostName = "dreamer"; 
-    networking.networkmanager.enable = true;  
     networking.firewall = {
         enable = true;
         allowedTCPPorts = [ 
-            #spotify
+    #spotify
             57621
             4840
             4855

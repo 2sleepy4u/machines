@@ -28,10 +28,10 @@
     hardware.pulseaudio.enable = true;
 	sound.enable = true;
 
+	services.xserver.xkb.layout = "it";
     i18n.defaultLocale = "it_IT.UTF-8";
     console = {
         font = "Lat2-Terminus16";
-        keyMap = "it";
         useXkbConfig = true; 
     };
     fonts.packages = with pkgs; [
@@ -58,7 +58,6 @@
         initialPassword = "123";
         extraGroups = [ "wheel" "libvirtd" "audio" "networkmanager" "dialout" "usb"];
         packages = with pkgs; [
-			figma-linux
 			lldb
             cargo
             gh
@@ -90,9 +89,11 @@
         neofetch
         pciutils
         lsof
+		brightnessctl
 		libsForQt5.qt5.qtquickcontrols2
 		libsForQt5.qt5.qtgraphicaleffects
 		xdg-desktop-portal-gtk
+		(
         catppuccin-sddm.override {
             flavor = "mocha";
             font  = "Noto Sans";
@@ -100,5 +101,6 @@
             background = "${../pictures/eva02.png}";
             loginBackground = true;
         }
+		)
     ];
-
+}

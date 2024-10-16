@@ -2,7 +2,7 @@
     description = "2sleepy4uu";
     inputs = {
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-
+		catppuccin.url = "github:catppuccin/nix";
         nixvim = {
             url = "github:nix-community/nixvim/nixos-24.05";
             inputs.nixpkgs.follows = "nixpkgs";
@@ -38,7 +38,12 @@
                             home-manager.useGlobalPkgs = true;
                             home-manager.useUserPackages = true;
                             home-manager.extraSpecialArgs = { inherit inputs; };
-                            home-manager.users.im2sleepy = import ./dreamer/home.nix;
+                            home-manager.users.im2sleepy = {
+								imports = [
+									./dreamer/home.nix
+									#catppuccin.homeManagerModules.catppuccin
+								];
+							};
                         }
                 ];
             };
