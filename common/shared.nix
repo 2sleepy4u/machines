@@ -58,6 +58,7 @@
         initialPassword = "123";
         extraGroups = [ "wheel" "libvirtd" "audio" "networkmanager" "dialout" "usb"];
         packages = with pkgs; [
+			nchat
 			lldb
             cargo
             gh
@@ -79,6 +80,7 @@
     };
 
     environment.systemPackages = with pkgs; [
+		psmisc
 		parted
         wget
         efibootmgr

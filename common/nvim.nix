@@ -120,6 +120,7 @@
 				elmls.enable = true;
 				nixd.enable = true;
 				lua-ls.enable = true;
+				dartls.enable = true;
 				rust-analyzer = {
 					enable = true;
 					installCargo = true;

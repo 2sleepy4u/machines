@@ -157,12 +157,13 @@ in
             }
 
             #tray, #pulseaudio, #network, #battery, #bluetooth,
-            #custom-playerctl.backward, #custom-playerctl.play, #custom-playerctl.forward {
+            #custom-playerctl.backward, #custom-playerctl.play, #custom-playerctl.forward,
+			#temperature {
                 background: #${tertiary_background_hex};
                 font-weight: bold;
                 margin: 5px 0px;
             }
-            #tray, #pulseaudio, #network, #battery, #bluetooth {
+            #tray, #pulseaudio, #network, #battery, #bluetooth, #temperature {
                 color: #${tertiary_accent};
                 border-radius: 10px 24px 10px 24px;
                 padding: 0 20px;
