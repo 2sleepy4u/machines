@@ -20,13 +20,13 @@
     programs.hyprland.enable = true;
 
     hardware.opengl.enable = true;
-    hardware.opengl.driSupport = true;
+    #hardware.opengl.driSupport = true;
     hardware.opengl.driSupport32Bit = true;
     hardware.enableAllFirmware = true;
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
-    hardware.pulseaudio.enable = true;
-	sound.enable = true;
+    hardware.pulseaudio.enable = false;
+	#sound.enable = true;
 
 	services.xserver.xkb.layout = "it";
     i18n.defaultLocale = "it_IT.UTF-8";
@@ -56,8 +56,9 @@
     users.users.im2sleepy = {
         isNormalUser = true;
         initialPassword = "123";
-        extraGroups = [ "wheel" "libvirtd" "audio" "networkmanager" "dialout" "usb"];
+        extraGroups = [ "wheel" "libvirtd" "audio" "networkmanager" "dialout" "usb" "docker"];
         packages = with pkgs; [
+			sof-firmware
 			lldb
             cargo
             gh
@@ -78,7 +79,11 @@
         ];
     };
 
+	environment.pathsToLink = [ "share/thumbnailers" ];
     environment.systemPackages = with pkgs; [
+		#kdePackages.qtwayland
+		libheif
+		libheif.out
 		psmisc
 		parted
         wget

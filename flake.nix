@@ -1,6 +1,13 @@
 {
     description = "2sleepy4uu";
     inputs = {
+        unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+	unstable-vim = {
+		url = "github:nix-community/nixvim";
+	};
+	unstable-home-manager = {
+		url = "github:nix-community/home-manager";
+	};
         nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
 		catppuccin.url = "github:catppuccin/nix";
         nixvim = {
@@ -14,11 +21,11 @@
         nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     };
 
-    outputs = { self, nixpkgs, home-manager, nixvim, ... }@inputs: {
+    outputs = { self, nixpkgs, unstable, home-manager, unstable-home-manager, nixvim, unstable-vim,  ... }@inputs: {
         nixosConfigurations = {
             sleeper = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
-                specialArgs = { nixvim = inputs.nixvim; };
+                specialArgs = { nixvim = nixvim; };
                 modules = [
                     ./sleeper/configuration.nix
                         home-manager.nixosModules.home-manager {
@@ -29,12 +36,12 @@
                         }
                 ];
             };
-            dreamer = nixpkgs.lib.nixosSystem {
+            dreamer = unstable.lib.nixosSystem {
                 system = "x86_64-linux";
-                specialArgs = { nixvim = inputs.nixvim; };
+                specialArgs = { nixvim = unstable-vim; };
                 modules = [
                     ./dreamer/configuration.nix
-                        home-manager.nixosModules.home-manager {
+                        unstable-home-manager.nixosModules.home-manager {
                             home-manager.useGlobalPkgs = true;
                             home-manager.useUserPackages = true;
                             home-manager.extraSpecialArgs = { inherit inputs; };

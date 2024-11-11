@@ -9,14 +9,29 @@
 
     boot.supportedFilesystems = [ "ntfs" "hfs+" "hfsplus"];
     services.xserver.videoDrivers = [ "modesetting" ];
-    boot.kernelModules = [ "i915" ];
+    boot.kernelModules = [ "i915"  "snd_hda_intel" "snd_soc_skl"];
     #nix-shell -p pciutils --run "lspci -nn | grep VGA"
     #to get device id [8086:<divice ID>]
+	boot.kernelPackages = pkgs.linuxPackages_6_11;
     boot.kernelParams = [ "i915.force_probe=7d55" ];
-    hardware.opengl.extraPackages = with pkgs; [ onevpl-intel-gpu ];
-    #hardware.ipu6.enable = true;
-    #hardware.ipu6.platform = "ipu6epmtl";
+	hardware.enableRedistributableFirmware = true;
+    hardware.graphics.extraPackages = with pkgs; [ vpl-gpu-rt ];
+	services.pipewire = {
+		enable = true;
+		alsa.enable = true;
+		pulse.enable = true;
+	};
 
+	virtualisation.docker.enable = true;
+
+    hardware.ipu6.enable = true;
+	hardware.ipu6.platform = "ipu6epmtl";
+
+	programs.kdeconnect = {
+		enable = true;
+		package = pkgs.kdePackages.kdeconnect-kde;
+		#indicator = true;
+	};
 	services.displayManager.sddm = {
 		enable = true;
 		theme = "catppuccin-mocha";

@@ -1,13 +1,13 @@
 { inputs, config, pkgs, ... }:
 {
 	imports = [
-		inputs.nixvim.homeManagerModules.nixvim
+		inputs.unstable-vim.homeManagerModules.nixvim
 		inputs.catppuccin.homeManagerModules.catppuccin
-		../common/nvim.nix
+		../dreamer/nvim.nix
 		../common/mpv.nix
 		../common/gtk.nix
 		../common/git.nix
-		../common/waybar.nix
+		./waybar.nix
 		../common/wlogout.nix
 	];
 
@@ -26,6 +26,11 @@
 		window.opacity = 0.8;
 	};
 
+	services.dunst.enable = true;
+	services.dunst.catppuccin.enable = true;
+	services.dunst.catppuccin.flavor = "mocha";
+
+
 	home.packages = with pkgs; [
 		#programs
 		brave
@@ -39,9 +44,9 @@
 		#yt-dlp
 
 		#custom
-		gnome.nautilus
-		dunst
-		blueberry
+		#dunst
+		#blueberry
+		overskride
 		networkmanagerapplet
 		cliphist
 		wl-clipboard
