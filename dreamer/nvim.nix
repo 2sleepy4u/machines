@@ -16,10 +16,17 @@
 			autoread = true;
 		};
 		keymaps = [
+		/*
 		{
 			key = "<Tab>";
 			mode = "n";
 			action = ":NERDTreeToggle<CR>";
+		}
+		*/
+		{
+			key = "<Leader>e";
+			mode = "n";
+			action = ":lua vim.diagnostic.open_float()<CR>";
 		}
 		{
 			key = "<Leader>pf";
@@ -39,7 +46,7 @@
 		{
 			key = "<C-space>";
 			mode = "n";
-			action = ":lua vim.lsp.buf.code_action()<CR>";
+			action = ":lua require('actions-preview').code_actions()<CR>";
 		}
 		{
 			key = "<C-j>";
@@ -81,6 +88,7 @@
 		};
 		extraPlugins = with pkgs.vimPlugins; [
 			nvim-dap
+			actions-preview-nvim
 		];
 
 

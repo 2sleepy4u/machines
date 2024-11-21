@@ -22,16 +22,25 @@
 		pulse.enable = true;
 	};
 
+	users.defaultUserShell = pkgs.zsh;
 	virtualisation.docker.enable = true;
 
     hardware.ipu6.enable = true;
 	hardware.ipu6.platform = "ipu6epmtl";
+	programs.zsh = {
+		enable = true;
+		enableCompletion = true;
+		autosuggestions.enable = true;
+		syntaxHighlighting.enable = true;
+	};
 
 	programs.kdeconnect = {
 		enable = true;
 		package = pkgs.kdePackages.kdeconnect-kde;
 		#indicator = true;
 	};
+	services.fprintd.enable = true;
+
 	services.displayManager.sddm = {
 		enable = true;
 		theme = "catppuccin-mocha";

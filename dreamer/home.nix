@@ -5,7 +5,7 @@
 		inputs.catppuccin.homeManagerModules.catppuccin
 		../dreamer/nvim.nix
 		../common/mpv.nix
-		../common/gtk.nix
+		#../common/gtk.nix
 		../common/git.nix
 		./waybar.nix
 		../common/wlogout.nix
@@ -19,6 +19,7 @@
 	programs.home-manager.enable = true;
 
 	programs.brave.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
+	programs.starship.enable = true;
 	programs.alacritty.enable = true;
 	programs.alacritty.catppuccin.enable = true;
 	programs.alacritty.catppuccin.flavor = "mocha";
@@ -26,6 +27,9 @@
 		window.opacity = 0.8;
 	};
 
+
+	gtk.enable = true;
+	gtk.catppuccin.enable = true;
 	services.dunst.enable = true;
 	services.dunst.catppuccin.enable = true;
 	services.dunst.catppuccin.flavor = "mocha";
