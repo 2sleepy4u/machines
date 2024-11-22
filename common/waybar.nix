@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{lib, config, pkgs, ... }:
 let 
   font = "RobotoMono Nerd Font";
   fontsize = "12";
@@ -17,136 +17,6 @@ let
 
 in
 {
-	imports = [
-		#inputs.ags.homeManagerModules.default 
-		inputs.nixvim.homeManagerModules.nixvim
-		./nvim.nix
-	];
-
-	home.stateVersion = "23.11";
-	home.sessionVariables = {
-		NIXOS_OZONE_WL = "1";
-		EDITOR = "nvim";
-		#STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
-	};
-	programs.home-manager.enable = true;
-
-	programs.brave.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
-	programs.git = {
-		enable = true;
-		userName = "2sleepy4uu";
-		userEmail = "riccardo.zancan00@gmail.com";
-	};
-	programs.wlogout = {
-		enable = true;
-		layout = [{
-			label = "logout";
-			action = "sleep 1; hyprctl dispatch exit";
-			text = "Logout";
-			keybind = "e";
-		}
-		{
-			label = "reboot";
-			action = "sleep 1; reboot";
-			text = "Reboot";
-			keybind = "r";
-		}
-		{
-			label = "shutdown";
-			action = "sleep 1; poweroff";
-			text = "Shutdown";
-			keybind = "s";
-		}
-		{
-			label = "lock";
-			action = "swaylock \
-					  --screenshots \
-					  --clock \
-					  --indicator \
-					  --indicator-radius 100 \
-					  --indicator-thickness 7 \
-					  --effect-blur 7x5 \
-					  --effect-vignette 0.5:0.5 \
-					  --ring-color bb00cc \
-					  --key-hl-color 880033 \
-					  --line-color 00000000 \
-					  --inside-color 00000088 \
-					  --separator-color 00000000 \
-					  --grace 0 \
-					  --fade-in 0.2";
-			text = "Lock";
-			keybind = "l";
-		}];
-	};
-
-
-	home.packages = with pkgs; [
-		#programs
-		brave
-		firefox
-		spotify
-		discord
-
-		#utility
-		imv
-		unzip
-		pavucontrol
-		#yt-dlp
-
-		#iOS
-		#usbmuxd
-		#libusbmuxd
-
-		#custom
-		gnome.nautilus
-		wlogout
-		dunst
-		pavucontrol
-		blueberry
-		networkmanagerapplet
-		cliphist
-		wl-clipboard
-		grim
-		slurp
-		alacritty
-		wpaperd
-		wayvnc
-		waybar
-		playerctl
-		#swaybg
-		swaylock-effects
-		wofi
-		prismlauncher
-
-		#gaming
-		protonup
-		mangohud
-	];
-	gtk = {
-		enable = true;
-		theme = {
-			name = "Catppuccin-Macchiato-Compact-Pink-Dark";
-			package = pkgs.catppuccin-gtk.override {
-				accents = [ "pink" ];
-				size = "compact";
-				tweaks = ["rimless" "black"];
-				variant = "macchiato";
-			};
-		};
-	};
-
-
-	programs.mpv = {
-		enable = true;
-		config = {
-			volume = 40;
-			hls-bitrate = "max";
-			cache = "yes";
-			alpha = "yes";
-			background="0/0";
-			ytdl-format="bestvideo[ext=mp4][height<=?1080]+bestaudio[ext=m4a]";
-		};
-	};
 	programs.waybar = {
 		enable = true;
 		systemd.enable = true;
@@ -154,12 +24,41 @@ in
 			height = 30;
 			modules-left = [ "hyprland/workspaces" ];
 			modules-right = [ 
+				"power-profiles_daemon"
+				"keyboard-state"
+				"temperature"
+				"battery"
 				"pulseaudio"
 				"custom/playerctl#backward" "custom/playerctl#play" "custom/playerctl#forward"
-				"custom/playerlabel" "bluetooth" "clock" ];
+				"custom/playerlabel" 
+				"bluetooth" 
+				"network"
+				"clock" ];
 			position = "bottom";
+			keyboard-state = {
+				capslock = true;
+				format = "{name} {icon}";
+					format-icons = {
+						locked = "";
+						unlocked = "";
+					};
+			};
+			battery = {
+				states = {
+					warning = 30;
+					critical = 15;
+				};
+				format = "{capacity} {icon}";
+				format-charging = "{capacity}% ";
+				format-icons = [""  "" "" "" ""];
+			};
 			pulseaudio = {
 				on-click = "pavucontrol";
+			};
+			network = {
+				format-wifi = "{essid} ({signalStrength}%) ";
+				format-ethernet = "{ipaddr}/{cidr} ";
+				format-disconnected = "Disconnected ⚠";
 			};
 			bluetooth = {
 				format = " {status}";
@@ -258,12 +157,13 @@ in
             }
 
             #tray, #pulseaudio, #network, #battery, #bluetooth,
-            #custom-playerctl.backward, #custom-playerctl.play, #custom-playerctl.forward {
+            #custom-playerctl.backward, #custom-playerctl.play, #custom-playerctl.forward,
+			#temperature {
                 background: #${tertiary_background_hex};
                 font-weight: bold;
                 margin: 5px 0px;
             }
-            #tray, #pulseaudio, #network, #battery, #bluetooth {
+            #tray, #pulseaudio, #network, #battery, #bluetooth, #temperature {
                 color: #${tertiary_accent};
                 border-radius: 10px 24px 10px 24px;
                 padding: 0 20px;
