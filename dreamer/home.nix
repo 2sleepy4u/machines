@@ -41,6 +41,8 @@
 		spotify
 		discord
 
+		#gnome-network-displays
+
 		#utility
 		imv
 		unzip

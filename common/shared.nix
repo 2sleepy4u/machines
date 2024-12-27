@@ -40,6 +40,8 @@
 		(nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
     ];
 
+	programs.ssh.askPassword = "";
+
     services.printing.enable = true;
     services.avahi.enable = true;
     services.avahi.nssmdns4 = true;
@@ -82,6 +84,7 @@
 	environment.pathsToLink = [ "share/thumbnailers" ];
     environment.systemPackages = with pkgs; [
 		#kdePackages.qtwayland
+		gnome-network-displays
 		libheif
 		libheif.out
 		psmisc

@@ -29,7 +29,7 @@ in
 
 			];
 			modules-center = [
-				"bluetooth" 
+				#"bluetooth" 
 				"network"
 				"pulseaudio"
 				"pulseaudio/slider"
