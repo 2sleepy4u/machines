@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
 	description = "2sleepy4uu";
 	inputs = {
+=======
+    description = "2sleepy4uu";
+    inputs = {
+>>>>>>> 3cefe59c7c4f95c5c549eeb1f95895174661c377
 		#unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 		#unstable-vim.url = "github:nix-community/nixvim";
 		#unstable-home-manager.url = "github:nix-community/home-manager";
@@ -15,7 +20,11 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 		#nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+<<<<<<< HEAD
     };
+=======
+	};
+>>>>>>> 3cefe59c7c4f95c5c549eeb1f95895174661c377
 
     outputs = { self, nixpkgs, home-manager, nixvim,  ... }@inputs: {
         nixosConfigurations = {
@@ -35,8 +44,13 @@
             #dreamer = unstable.lib.nixosSystem {
             dreamer = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
+<<<<<<< HEAD
                 #specialArgs = { nixvim = unstable-vim; };
                 specialArgs = { nixvim = nixvim; };
+=======
+                specialArgs = { nixvim = nixvim; };
+                #specialArgs = { nixvim = unstable-vim; };
+>>>>>>> 3cefe59c7c4f95c5c549eeb1f95895174661c377
                 modules = [
                     ./dreamer/configuration.nix
                         #unstable-home-manager.nixosModules.home-manager {

@@ -16,10 +16,17 @@
 			autoread = true;
 		};
 		keymaps = [
+		/*
 		{
 			key = "<Tab>";
 			mode = "n";
 			action = ":NERDTreeToggle<CR>";
+		}
+		*/
+		{
+			key = "<Leader>e";
+			mode = "n";
+			action = ":lua vim.diagnostic.open_float()<CR>";
 		}
 		{
 			key = "<Leader>pf";
@@ -39,7 +46,7 @@
 		{
 			key = "<C-space>";
 			mode = "n";
-			action = ":lua vim.lsp.buf.code_action()<CR>";
+			action = ":lua require('actions-preview').code_actions()<CR>";
 		}
 		{
 			key = "<C-j>";
@@ -74,12 +81,14 @@
 			cmp-nvim-lsp.enable = true;
 			undotree.enable = true;
 			fugitive.enable = true;
-			rust-tools.enable = true;
-			#cmp_luasnip.enable = true;
+			web-devicons.enable = true;
+			#rust-tools.enable = true;
+			cmp_luasnip.enable = true;
 			luasnip.enable = true;
 		};
 		extraPlugins = with pkgs.vimPlugins; [
 			nvim-dap
+			actions-preview-nvim
 		];
 
 
@@ -101,6 +110,22 @@
 
 				mapping = {
 					"<CR>" = "cmp.mapping.confirm({ select = true })";
+					"<Up>" = ''
+							function(fallback)
+								if cmp.visible() then
+									cmp.select_prev_item()
+								else fallback()
+								end
+							end
+						'';
+					"<Down>" = ''
+							function(fallback)
+								if cmp.visible() then
+									cmp.select_next_item()
+								else fallback()
+								end
+							end
+						'';
 					"<Tab>" = ''
 							function(fallback)
 								if cmp.visible() then
@@ -116,12 +141,11 @@
 		plugins.lsp = {
 			enable = true;
 			servers = {
-				hls.enable = true;
 				elmls.enable = true;
 				nixd.enable = true;
-				lua-ls.enable = true;
+				lua_ls.enable = true;
 				dartls.enable = true;
-				rust-analyzer = {
+				rust_analyzer = {
 					enable = true;
 					installCargo = true;
 					installRustc = true;

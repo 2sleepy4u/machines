@@ -2,7 +2,7 @@
 {
 	imports = [
 		inputs.nixvim.homeManagerModules.nixvim
-		../common/nvim.nix
+		./nvim.nix
 		../common/mpv.nix
 		../common/gtk.nix
 		../common/git.nix
