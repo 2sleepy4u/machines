@@ -141,10 +141,13 @@
 		plugins.lsp = {
 			enable = true;
 			servers = {
+				clangd.enable = true;
 				elmls.enable = true;
 				nixd.enable = true;
 				lua_ls.enable = true;
 				dartls.enable = true;
+				pyright.enable = true;
+				gopls.enable = true;
 				rust_analyzer = {
 					enable = true;
 					installCargo = true;
