@@ -16,6 +16,7 @@
     boot.kernelParams = [ "i915.force_probe=7d55" ];
 	hardware.enableRedistributableFirmware = true;
     hardware.graphics.extraPackages = with pkgs; [ vpl-gpu-rt ];
+    hardware.pulseaudio.enable = false;
 	services.pipewire = {
 		enable = true;
 		alsa.enable = true;

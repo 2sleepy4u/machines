@@ -25,7 +25,7 @@
     hardware.enableAllFirmware = true;
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
-    hardware.pulseaudio.enable = false;
+    #hardware.pulseaudio.enable = false;
 	#sound.enable = true;
 
 	services.xserver.xkb.layout = "it";
@@ -49,7 +49,7 @@
     services.tumbler.enable = true;
 
 	services.xserver.enable = true;
-	services.displayManager.sddm.enable = true;
+	#services.displayManager.sddm.enable = true;
 
 	security.pam.services.swaylock.text = ''auth Include login '';
 
