@@ -1,7 +1,7 @@
 { inputs, config, pkgs, ... }:
 {
 	imports = [
-		inputs.unstable-vim.homeManagerModules.nixvim
+		inputs.nixvim.homeManagerModules.nixvim
 		inputs.catppuccin.homeManagerModules.catppuccin
 		../dreamer/nvim.nix
 		../common/mpv.nix

@@ -78,6 +78,8 @@
 			telescope.enable = true;
 			telescope.extensions.ui-select.enable = true;
 			treesitter.enable = true;
+			treesitter.settings.auto_install = true;
+			treesitter.settings.highlight.enable = true;
 			cmp-nvim-lsp.enable = true;
 			undotree.enable = true;
 			fugitive.enable = true;
@@ -148,6 +150,7 @@
 				dartls.enable = true;
 				pyright.enable = true;
 				gopls.enable = true;
+				templ.enable = true;
 				rust_analyzer = {
 					enable = true;
 					installCargo = true;
