@@ -4,6 +4,7 @@
 		enable = true;
 		opts = {
 			number = true;
+			relativenumber = true;
 			tabstop = 4;
 			softtabstop = 4;
 			shiftwidth = 4;
@@ -17,13 +18,11 @@
 			ignorecase = true;
 		};
 		keymaps = [
-		/*
 		{
 			key = "<Tab>";
 			mode = "n";
-			action = ":NERDTreeToggle<CR>";
+			action = ":Lexplore<CR>";
 		}
-		*/
 		{
 			key = "<Leader>e";
 			mode = "n";
