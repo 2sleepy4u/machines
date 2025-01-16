@@ -24,6 +24,16 @@
 			action = ":Lexplore<CR>";
 		}
 		{
+			key = "<Leader>E";
+			mode = "n";
+			action = ":lua require('telescope.builtin').diagnostics()<CR>";
+		}
+		{
+			key = "<Leader>s";
+			mode = "n";
+			action = ":lua require('telescope.builtin').lsp_document_symbols()<CR>";
+		}
+		{
 			key = "<Leader>e";
 			mode = "n";
 			action = ":lua vim.diagnostic.open_float()<CR>";
