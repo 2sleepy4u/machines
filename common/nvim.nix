@@ -99,6 +99,7 @@
 			luasnip.enable = true;
 		};
 		extraPlugins = with pkgs.vimPlugins; [
+			edgedb-vim
 			nvim-dap
 			actions-preview-nvim
 		];

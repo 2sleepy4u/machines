@@ -24,6 +24,15 @@
 		(nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
     ];
 
+	programs.tmux.enable = true;
+	programs.tmux.plugins = with pkgs.tmuxPlugins; [ 
+		battery
+		catppuccin
+		resurrect
+	];
+
+
+
     networking.networkmanager.enable = true;  
     environment.systemPackages = with pkgs; [
 		#kdePackages.qtwayland
