@@ -39,6 +39,9 @@
 		brave
 		spotify
 		discord
+		gnome-calculator
+
+		direnv
 
 		#gnome-network-displays
 
