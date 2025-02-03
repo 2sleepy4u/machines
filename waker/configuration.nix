@@ -33,6 +33,8 @@
 		syntaxHighlighting.enable = true;
 	};
 
+	virtualisation.docker.enable = true;
+
     users.users.im2sleepy = {
         isNormalUser = true;
         initialPassword = "123";
@@ -47,6 +49,9 @@
 			tree
 			ripgrep
 			usbutils
+			docker
+			edgedb
+			direnv
         ];
     };
 
@@ -62,6 +67,7 @@
         pciutils
         lsof
 		xdg-desktop-portal-gtk
+		docker
     ];
 
   system.stateVersion = "24.05"; # Did you read the comment?

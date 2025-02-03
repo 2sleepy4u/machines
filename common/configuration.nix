@@ -35,6 +35,7 @@
 
     networking.networkmanager.enable = true;  
     environment.systemPackages = with pkgs; [
+		ffmpeg
 		#kdePackages.qtwayland
 		gnome-network-displays
 		libheif
