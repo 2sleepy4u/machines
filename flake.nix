@@ -2,7 +2,7 @@
     description = "2sleepy4uu";
     inputs = {
         nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-		#unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+		unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 		#unstable-vim.url = "github:nix-community/nixvim";
 		#unstable-home-manager.url = "github:nix-community/home-manager";
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -18,11 +18,19 @@
 		#nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 	};
 
-    outputs = { self, catppuccin, nixpkgs, home-manager, nixvim, nixos-wsl, ... }@inputs: {
+    outputs = { 
+		self, 
+		catppuccin, 
+		nixpkgs, home-manager, unstable,
+		nixvim, nixos-wsl, ... 
+	}@inputs: {
         nixosConfigurations = {
             waker = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
-                specialArgs = { nixvim = nixvim; };
+                specialArgs = { 
+					nixvim = nixvim; 
+					unstablePkgs = unstable;
+				};
                 modules = [
                     nixos-wsl.nixosModules.default
                     {
@@ -68,6 +76,15 @@
                         }
                 ];
             };
+
+			snoozer =  nixpkgs.lib.nixosSystem {
+                system = "x86_64-linux";
+                specialArgs = { nixvim = inputs.nixvim; };
+                modules = [
+                    ./snoozer/configuration.nix
+                ];
+            };
+
             dreamy-server = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 specialArgs = { nixvim = inputs.nixvim; };
