@@ -29,6 +29,7 @@
 
 	gtk.enable = true;
 	gtk.catppuccin.enable = true;
+	gtk.catppuccin.icon.enable = true;
 	services.dunst.enable = true;
 	services.dunst.catppuccin.enable = true;
 	services.dunst.catppuccin.flavor = "mocha";
@@ -42,6 +43,7 @@
 		gnome-calculator
 
 		direnv
+		xfce.thunar
 
 		#gnome-network-displays
 

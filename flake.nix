@@ -2,9 +2,6 @@
     description = "2sleepy4uu";
     inputs = {
         nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-		unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-		#unstable-vim.url = "github:nix-community/nixvim";
-		#unstable-home-manager.url = "github:nix-community/home-manager";
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
 		catppuccin.url = "github:catppuccin/nix";
 		nixvim = {
@@ -15,12 +12,17 @@
 			url = "github:nix-community/home-manager/release-24.11";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+		disko = {
+			url = "github:nix-community/disko";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 		#nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 	};
 
     outputs = { 
 		self, 
 		catppuccin, 
+		disko,
 		nixpkgs, home-manager, unstable,
 		nixvim, nixos-wsl, ... 
 	}@inputs: {
@@ -55,11 +57,9 @@
                         }
                 ];
             };
-            #dreamer = unstable.lib.nixosSystem {
             dreamer = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 specialArgs = { nixvim = nixvim; };
-                #specialArgs = { nixvim = unstable-vim; };
                 modules = [
                     ./dreamer/configuration.nix
                         #unstable-home-manager.nixosModules.home-manager {
@@ -77,10 +77,12 @@
                 ];
             };
 
+			#nix run nixpkgs#nixos-anywhare --flake .#snoozer --generate-hardware-config nixos-generate-config ./hardware-configuration.nix <hostname>
 			snoozer =  nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 specialArgs = { nixvim = inputs.nixvim; };
                 modules = [
+					disko.nixosModules.disko
                     ./snoozer/configuration.nix
                 ];
             };

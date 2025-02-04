@@ -74,6 +74,7 @@
         mode = "mirror";
         mountpoint = "/storage";
 		rootFsOotions = {
+			autoreplace = "on";
 			ashift = 12;
 			xattr = "sa";
 			compression = "lz4";

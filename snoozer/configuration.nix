@@ -9,12 +9,11 @@
 		./network.nix
 		./services.nix
 		./users.nix
+		./disk-config.nix
 		#inputs.nix-minecraft-nixosModules.minecraft-servers
 		inputs.nixvim.nixosModules.nixvim
 		../common/nvim.nix
 		];
-
-	networking.hostId = "4e98920d";
 
 	nixpkgs.config.allowUnfree = true;
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
