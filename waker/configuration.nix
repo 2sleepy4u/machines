@@ -16,6 +16,9 @@
 		extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
 	};
 
+	programs.virt-manager.enable = true;
+	users.groups.libvirtd.members = ["im2sleepy"];
+	virtualisation.libvirtd.enable = true;
     networking.networkmanager.enable = true;  
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -40,6 +43,7 @@
         initialPassword = "123";
         extraGroups = [ "wheel" "libvirtd" "audio" "networkmanager" "dialout" "usb" "docker"];
         packages = with pkgs; [
+			virt-manager
 			sof-firmware
 			lldb
             cargo

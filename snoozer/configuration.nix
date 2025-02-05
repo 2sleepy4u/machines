@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ nixvim, pkgs, ... }:
 {
 	imports =
 		[ # Include the results of the hardware scan.
@@ -10,8 +10,9 @@
 		./services.nix
 		./users.nix
 		./disk-config.nix
+		./zfs.nix
 		#inputs.nix-minecraft-nixosModules.minecraft-servers
-		inputs.nixvim.nixosModules.nixvim
+		nixvim.nixosModules.nixvim
 		../common/nvim.nix
 		];
 

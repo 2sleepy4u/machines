@@ -23,7 +23,7 @@
 		self, 
 		catppuccin, 
 		disko,
-		nixpkgs, home-manager, unstable,
+		nixpkgs, home-manager,
 		nixvim, nixos-wsl, ... 
 	}@inputs: {
         nixosConfigurations = {
@@ -31,7 +31,6 @@
                 system = "x86_64-linux";
                 specialArgs = { 
 					nixvim = nixvim; 
-					unstablePkgs = unstable;
 				};
                 modules = [
                     nixos-wsl.nixosModules.default
@@ -77,12 +76,13 @@
                 ];
             };
 
-			#nix run nixpkgs#nixos-anywhare --flake .#snoozer --generate-hardware-config nixos-generate-config ./hardware-configuration.nix <hostname>
+			# nix run nixpkgs#nixos-anywhere -- --flake .#snoozer --generate-hardware-config nixos-generate-config ./hardware-configuration.nix root@192.168.122.194
 			snoozer =  nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 specialArgs = { nixvim = inputs.nixvim; };
                 modules = [
 					disko.nixosModules.disko
+					catppuccin.nixosModules.catppuccin
                     ./snoozer/configuration.nix
                 ];
             };

@@ -4,7 +4,8 @@
     disk = {
       nixos = {
         type = "disk";
-        device = "/dev/nvme0n1";
+        # device = "/dev/nvme0n1";
+        device = "/dev/vda";
         content = {
           type = "gpt";
           partitions = {
@@ -37,7 +38,8 @@
       };
       disk1 = {
         type = "disk";
-        device = "/dev/sda";
+        # device = "/dev/sda";
+        device = "/dev/vdb";
         content = {
           type = "gpt";
           partitions = {
@@ -53,7 +55,8 @@
       };
       disk2 = {
         type = "disk";
-        device = "/dev/sdb";
+        # device = "/dev/sdb";
+        device = "/dev/vdc";
         content = {
           type = "gpt";
           partitions = {
@@ -73,9 +76,9 @@
         type = "zpool";
         mode = "mirror";
         mountpoint = "/storage";
-		rootFsOotions = {
+		rootFsOptions = {
 			autoreplace = "on";
-			ashift = 12;
+			ashift = "12";
 			xattr = "sa";
 			compression = "lz4";
 			atime = "off";
