@@ -35,6 +35,7 @@
 		imv
 		unzip
 		pavucontrol
+		gnome-network-displays
 		#yt-dlp
 
 		#iOS

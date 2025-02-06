@@ -1,11 +1,15 @@
 { lib, ... }:
+let 
+	nixosDisk = "/dev/vda";
+	dataDisk = "/dev/vdb";
+	backupDisk = "/dev/vdc";
+in
 {
   disko.devices = {
     disk = {
       nixos = {
         type = "disk";
-        # device = "/dev/nvme0n1";
-        device = "/dev/vda";
+		device = nixosDisk;
         content = {
           type = "gpt";
           partitions = {
@@ -38,8 +42,7 @@
       };
       disk1 = {
         type = "disk";
-        # device = "/dev/sda";
-        device = "/dev/vdb";
+        device = dataDisk;
         content = {
           type = "gpt";
           partitions = {
@@ -55,8 +58,7 @@
       };
       disk2 = {
         type = "disk";
-        # device = "/dev/sdb";
-        device = "/dev/vdc";
+        device = backupDisk;
         content = {
           type = "gpt";
           partitions = {
@@ -74,13 +76,23 @@
     zpool = {
       storage = {
         type = "zpool";
+		# mode = {
+		#         topology = {
+		#           type = "topology";
+		#           vdev = [{
+		#             mode = "mirror";
+		#             members = ["vdb" "vdc"];
+		#           }];
+		#         };
+		#       };
         mode = "mirror";
-        mountpoint = "/storage";
 		options = {
 			ashift = "12";
 			autoreplace = "on";
+			# mountpoint = "/mnt/storage";
 		};
 		rootFsOptions = {
+			canmount = "on";
 			xattr = "sa";
 			compression = "lz4";
 			atime = "off";
@@ -88,11 +100,19 @@
         datasets = {
           nextcloud = {
             type = "zfs_fs";
-            mountpoint = "/storage/nextcloud";
+            options = {
+				compression = "lz4";
+				canmount = "on";
+				mountpoint = "/mnt/storage/nextcloud";
+			};
           };
 		  jellyfin = {
             type = "zfs_fs";
-            mountpoint = "/storage/jellyfin";
+			options = {
+				compression = "lz4";
+				canmount = "on";
+				mountpoint = "/mnt/storage/jellyfin";
+			};
           };
         };
       };

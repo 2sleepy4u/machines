@@ -18,7 +18,6 @@
 		};
 		ettore = {
 			isNormalUser = true;
-			initialPassword = "123";
 			home = "/home/ettore";
 			extraGroups = [ "samba" ];
 		};

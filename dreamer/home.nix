@@ -45,7 +45,8 @@
 		direnv
 		xfce.thunar
 
-		#gnome-network-displays
+		gnome-network-displays
+	brightnessctl
 
 		#utility
 		imv

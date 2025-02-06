@@ -37,7 +37,6 @@
     environment.systemPackages = with pkgs; [
 		ffmpeg
 		#kdePackages.qtwayland
-		gnome-network-displays
 		libheif
 		libheif.out
 		psmisc
@@ -50,7 +49,6 @@
         neofetch
         pciutils
         lsof
-		brightnessctl
 		libsForQt5.qt5.qtquickcontrols2
 		libsForQt5.qt5.qtgraphicaleffects
 		xdg-desktop-portal-gtk
