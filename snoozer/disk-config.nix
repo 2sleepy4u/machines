@@ -76,18 +76,23 @@
         type = "zpool";
         mode = "mirror";
         mountpoint = "/storage";
-		rootFsOptions = {
-			autoreplace = "on";
+		options = {
 			ashift = "12";
+			autoreplace = "on";
+		};
+		rootFsOptions = {
 			xattr = "sa";
 			compression = "lz4";
 			atime = "off";
 		};
-
         datasets = {
-          dataset = {
+          nextcloud = {
             type = "zfs_fs";
-            mountpoint = "/storage/dataset";
+            mountpoint = "/storage/nextcloud";
+          };
+		  jellyfin = {
+            type = "zfs_fs";
+            mountpoint = "/storage/jellyfin";
           };
         };
       };

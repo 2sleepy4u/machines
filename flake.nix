@@ -76,7 +76,7 @@
                 ];
             };
 
-			# nix run nixpkgs#nixos-anywhere -- --flake .#snoozer --generate-hardware-config nixos-generate-config ./hardware-configuration.nix root@192.168.122.194
+			# nix run nixpkgs#nixos-anywhere -- --flake .#snoozer --generate-hardware-config nixos-generate-config ./snoozer/hardware-configuration.nix --target-host root@192.168.122.194
 			snoozer =  nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 specialArgs = { nixvim = inputs.nixvim; };
@@ -84,6 +84,7 @@
 					disko.nixosModules.disko
 					catppuccin.nixosModules.catppuccin
                     ./snoozer/configuration.nix
+					./snoozer/hardware-configuration.nix
                 ];
             };
 

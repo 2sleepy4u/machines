@@ -7,7 +7,9 @@
 		./caddy.nix
 		# ./samba.nix
 		./network.nix
-		./services.nix
+		# ./services.nix
+		./nextcloud.nix
+		./jellyfin.nix
 		./users.nix
 		./disk-config.nix
 		./zfs.nix
