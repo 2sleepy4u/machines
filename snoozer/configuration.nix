@@ -4,17 +4,21 @@
 		[ # Include the results of the hardware scan.
 		../common/configuration.nix
 		# ./hardware-configuration.nix
-		# ./services/caddy.nix
 		# ./samba.nix
 		./network.nix
-		# ./services/nextcloud.nix
-		# ./services/jellyfin.nix
 		./users.nix
 		./disk-config.nix
 		./zfs.nix
+
+		./services/caddy.nix
+		./services/nextcloud.nix
+		./services/jellyfin.nix
+
+
 		#inputs.nix-minecraft-nixosModules.minecraft-servers
-		# nixvim.nixosModules.nixvim
-		# ../common/nvim.nix
+
+		nixvim.nixosModules.nixvim
+		../common/nvim.nix
 		];
 
 	nixpkgs.config.allowUnfree = true;
