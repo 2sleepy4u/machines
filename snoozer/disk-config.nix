@@ -1,8 +1,8 @@
 { lib, ... }:
 let 
-	nixosDisk = "/dev/vda";
-	dataDisk = "/dev/vdb";
-	backupDisk = "/dev/vdc";
+	nixosDisk = "/dev/nvme0n1";
+	dataDisk = "/dev/sda";
+	backupDisk = "/dev/sdb";
 in
 {
   disko.devices = {
@@ -76,23 +76,15 @@ in
     zpool = {
       storage = {
         type = "zpool";
-		# mode = {
-		#         topology = {
-		#           type = "topology";
-		#           vdev = [{
-		#             mode = "mirror";
-		#             members = ["vdb" "vdc"];
-		#           }];
-		#         };
-		#       };
         mode = "mirror";
+		#proviamo
+		mountpoint = "/mnt/storage";
 		options = {
 			ashift = "12";
 			autoreplace = "on";
-			# mountpoint = "/mnt/storage";
 		};
 		rootFsOptions = {
-			canmount = "on";
+			canmount = "off";
 			xattr = "sa";
 			compression = "lz4";
 			atime = "off";
@@ -112,6 +104,22 @@ in
 				compression = "lz4";
 				canmount = "on";
 				mountpoint = "/mnt/storage/jellyfin";
+			};
+          };
+		  caddy = {
+            type = "zfs_fs";
+			options = {
+				compression = "lz4";
+				canmount = "on";
+				mountpoint = "/mnt/storage/caddy";
+			};
+          };
+		  mail = {
+            type = "zfs_fs";
+			options = {
+				compression = "lz4";
+				canmount = "on";
+				mountpoint = "/mnt/storage/mail";
 			};
           };
         };

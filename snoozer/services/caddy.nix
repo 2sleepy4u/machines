@@ -7,16 +7,24 @@
 			https://cloud.onirya.it {
 					log {
 							format console
-							output file /server/caddy/caddy.log
+							output file /mnt/storage/caddy/cloud.log
 					}
 					reverse_proxy 192.168.1.250:8081
 			}
 
 			https://pwd.onirya.it  {
+					log {
+							format console
+							output file /mnt/storage/caddy/pwd.log
+					}
 					reverse_proxy 192.168.1.250:8222
 			}
 
 			https://jelly.onirya.it  {
+					log {
+							format console
+							output file /mnt/storage/caddy/jelly.log
+					}
 					reverse_proxy 192.168.1.250:8096
 			}
 	'';

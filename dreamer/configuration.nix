@@ -5,6 +5,7 @@
 		../common/users.nix
 		../common/desktop.nix
         ../common/configuration.nix
+		../common/virt.nix
         ./hardware-configuration.nix
         ];
 

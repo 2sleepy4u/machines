@@ -13,6 +13,7 @@
 		./services/caddy.nix
 		./services/nextcloud.nix
 		./services/jellyfin.nix
+		./services/mail.nix
 
 
 		#inputs.nix-minecraft-nixosModules.minecraft-servers

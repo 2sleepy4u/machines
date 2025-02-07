@@ -2,8 +2,9 @@
 {
 	services = {
 		jellyfin = {
-			enable = false;
+			enable = true;
 			openFirewall = true;
+			dataDir = "/mnt/storage/jellyfin";
 		};
 	};
 }

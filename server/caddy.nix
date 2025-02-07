@@ -7,7 +7,7 @@
 			https://cloud.onirya.it {
 					log {
 							format console
-							output file /server/caddy/caddy.log
+							output file /mnt/caddy/caddy.log
 					}
 					reverse_proxy 192.168.1.250:8081
 			}
