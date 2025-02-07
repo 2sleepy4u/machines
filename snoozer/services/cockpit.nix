@@ -1,4 +1,4 @@
-{}:
+{...}:
 {
 	# create derivation to add declaratively extra apps / plugins like zfs manager
 	# then upload to nixpkgs

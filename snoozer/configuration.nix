@@ -14,6 +14,8 @@
 		./services/nextcloud.nix
 		./services/jellyfin.nix
 		./services/mail.nix
+		./services/ssh.nix
+		./services/cockpit.nix
 
 
 		#inputs.nix-minecraft-nixosModules.minecraft-servers
