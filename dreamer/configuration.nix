@@ -16,9 +16,7 @@
     #nix-shell -p pciutils --run "lspci -nn | grep VGA"
     #to get device id [8086:<divice ID>]
 	boot.kernelPackages = pkgs.linuxPackages_6_11;
-    boot.kernelParams = [ "i915.force_probe=7d55" ];
-	hardware.enableRedistributableFirmware = true;
-    hardware.graphics.extraPackages = with pkgs; [ vpl-gpu-rt ];
+    boot.kernelParams = [ "i915.force_probe=7d55" ]; hardware.enableRedistributableFirmware = true; hardware.graphics.extraPackages = with pkgs; [ vpl-gpu-rt ];
     hardware.pulseaudio.enable = false;
 	services.pipewire = {
 		enable = true;

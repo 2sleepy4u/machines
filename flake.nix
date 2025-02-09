@@ -76,15 +76,15 @@
                 ];
             };
 
-			# nix run nixpkgs#nixos-anywhere -- --flake .#snoozer --generate-hardware-config nixos-generate-config ./snoozer/hardware-configuration.nix <host>
-			snoozer =  nixpkgs.lib.nixosSystem {
+			# nix run nixpkgs#nixos-anywhere -- --flake .#snorer --generate-hardware-config nixos-generate-config ./snorer/hardware-configuration.nix <host>
+			snorer =  nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
                 specialArgs = { nixvim = inputs.nixvim; };
                 modules = [
 					disko.nixosModules.disko
 					catppuccin.nixosModules.catppuccin
-                    ./snoozer/configuration.nix
-					./snoozer/hardware-configuration.nix
+                    ./snorer/configuration.nix
+					./snorer/hardware-configuration.nix
                 ];
             };
         };

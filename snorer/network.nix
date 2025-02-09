@@ -1,7 +1,7 @@
 { inputs, config, pkgs, ... }:
 {
 	networking = {
-		hostName = "snoozer";
+		hostName = "snorer";
 		interfaces.enp1s0.ipv4.addresses = [{
 			address = "192.168.1.250";
 			prefixLength = 24;

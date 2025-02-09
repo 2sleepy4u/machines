@@ -3,8 +3,6 @@
 	imports =
 		[ # Include the results of the hardware scan.
 		../common/configuration.nix
-		# ./hardware-configuration.nix
-		# ./samba.nix
 		./network.nix
 		./users.nix
 		./disk-config.nix
@@ -16,7 +14,8 @@
 		./services/mail.nix
 		./services/ssh.nix
 		./services/cockpit.nix
-
+		# ./services/samba.nix
+		./services/vaultwarden.nix
 
 		#inputs.nix-minecraft-nixosModules.minecraft-servers
 
@@ -26,6 +25,8 @@
 
 	nixpkgs.config.allowUnfree = true;
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+	nix.settings.trusted-users = [ "root" "@wheel" ];
 
 	catppuccin.enable = true;
 	catppuccin.flavor = "mocha";

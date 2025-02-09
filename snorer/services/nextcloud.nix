@@ -11,6 +11,14 @@
 		requires = ["mysql.service"];
 		after = ["mysql.service"];
 	};
+	virtualisation.oci-containers.containers.onlyoffice =  {
+		image = "onlyoffice/documentserver:latest";
+		ports = ["8000:80"];
+		environmentFiles = [
+		# config.age.secrets.onlyofficeDocumentServerKey.path
+		];
+	};
+
 	services = {
 		nginx.virtualHosts."cloud.onirya.it".listen = [ { addr = "192.168.1.250"; port = 8081; }];
 		nginx.virtualHosts."onlyoffice.onirya.it".listen = [ { addr = "192.168.1.250"; port = 8082; }];
@@ -26,6 +34,10 @@
 				inherit calendar contacts mail notes onlyoffice tasks;
 			};
 			datadir = "/mnt/storage/nextcloud";
+			settings = {
+				mail_smtpmode = "sendmail";
+				mail_sendmailmode = "pipe";
+			};
 			config = {
 				overwriteProtocol = "https";
 				dbtype = "mysql";
