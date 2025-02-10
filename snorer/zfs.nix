@@ -6,7 +6,7 @@
 	boot.zfs.extraPools = [ "storage" ];
 	networking.hostId = "4e98920d";
 	services.zfs.autoScrub.enable = true;
-	services.zfs.autoScrub.interval = "14d";
+	services.zfs.autoScrub.interval = "weekly";
 	services.zfs.zed.enableMail = true;
 	services.zfs.zed.settings = {
 		ZED_DEBUG_LOG = "/tmp/zed.debug.log";

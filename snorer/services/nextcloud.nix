@@ -42,6 +42,7 @@
 				trusted_proxies = [ "192.168.1.250" ];
 
 				log_type = "file";
+				loglevel = 1;
 
 				enable_previews = true;
 				preview_ffmpeg_path = "${pkgs.ffmpeg}/bin";
