@@ -37,8 +37,12 @@
 			settings = {
 				mail_smtpmode = "sendmail";
 				mail_sendmailmode = "pipe";
+
 				trusted_domains = [ "192.168.1.250" "cloud.onirya.it"];
 				trusted_proxies = [ "192.168.1.250" ];
+
+				log_type = "file";
+
 				enable_previews = true;
 				preview_ffmpeg_path = "${pkgs.ffmpeg}/bin";
 				enabledPreviewProviders = [
