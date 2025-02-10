@@ -12,6 +12,10 @@
 					reverse_proxy 192.168.1.250:8081
 			}
 
+			https://onlyoffice.onirya.it {
+					reverse_proxy 192.168.1.250:8000
+			}
+
 			https://pwd.onirya.it  {
 					log {
 							format console
