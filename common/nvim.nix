@@ -19,6 +19,16 @@
 		};
 		keymaps = [
 		{
+			key = "gD";
+			mode = "n";
+			action =  "<cmd>lua vim.lsp.buf.declaration()<CR>";
+		}
+		{
+			key = "gD";
+			mode = "n";
+			action = "<cmd>lua vim.lsp.buf.definition()<CR>";
+		}
+		{
 			key = "<Tab>";
 			mode = "n";
 			action = ":Lexplore<CR>";

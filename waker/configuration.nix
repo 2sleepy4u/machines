@@ -28,6 +28,10 @@
     programs.starship.enable = true;
     services.openssh.enable = true;
 
+	services.nats = {
+		enable = true;
+	};
+
 	users.defaultUserShell = pkgs.zsh;
 	programs.zsh = {
 		enable = true;
