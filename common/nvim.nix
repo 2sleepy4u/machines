@@ -19,6 +19,11 @@
 		};
 		keymaps = [
 		{
+			key = "<Leader>r";
+			mode = "n";
+			action =  "<cmd>lua vim.lsp.buf.rename()<CR>";
+		}
+		{
 			key = "gD";
 			mode = "n";
 			action =  "<cmd>lua vim.lsp.buf.declaration()<CR>";
@@ -177,6 +182,7 @@
 					enable = true;
 					installCargo = true;
 					installRustc = true;
+					installRustfmt = true;
 				};
 			};
 		};

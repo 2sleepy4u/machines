@@ -1,5 +1,7 @@
 { lib, config, pkgs, nixvim, ... }:
-{
+let 
+	GevApi = (pkgs.callPackage ./../../aqc/genicam_api.nix);
+in {
 
     imports = [
         nixvim.nixosModules.nixvim
@@ -15,6 +17,8 @@
 		enable = true;
 		extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
 	};
+
+	# programs.nix-ld.enable = true;
 
 	programs.virt-manager.enable = true;
 	users.groups.libvirtd.members = ["im2sleepy"];
