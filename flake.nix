@@ -40,6 +40,7 @@
                         system.stateVersion = "24.05";
 						wsl.defaultUser = "im2sleepy";
                         wsl.enable = true;
+						wsl.usbip.enable = true;
                     }
 					catppuccin.nixosModules.catppuccin
                     ./waker/configuration.nix
