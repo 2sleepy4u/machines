@@ -2,6 +2,7 @@
  {
 	 programs.nixvim = {
 		enable = true;
+		globals.mapleader = ";";
 		opts = {
 			number = true;
 			relativenumber = true;
@@ -17,6 +18,18 @@
 			autoread = true;
 			ignorecase = true;
 		};
+		autoCmd = [
+		{
+			command = "set filetype=slint";
+			event = [
+				"BufRead"
+				"BufNewFile"
+			];
+			pattern = [
+				"*.slint"
+			];
+		}
+		];
 		keymaps = [
 		{
 			key = "<Leader>r";
@@ -24,7 +37,7 @@
 			action =  "<cmd>lua vim.lsp.buf.rename()<CR>";
 		}
 		{
-			key = "gD";
+			key = "gd";
 			mode = "n";
 			action =  "<cmd>lua vim.lsp.buf.declaration()<CR>";
 		}
@@ -169,6 +182,12 @@
 		plugins.lsp = {
 			enable = true;
 			servers = {
+				slint_lsp = {
+					enable = true;
+					cmd = ["slint-lsp"];
+					filetypes = ["slint"];
+				};
+				qmlls.enable = true;
 				ts_ls.enable = true;
 				clangd.enable = true;
 				elmls.enable = true;

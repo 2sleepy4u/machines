@@ -1,7 +1,5 @@
 { lib, config, pkgs, nixvim, ... }:
-let 
-	GevApi = (pkgs.callPackage ./../../aqc/genicam_api.nix);
-in {
+{
 
     imports = [
         nixvim.nixosModules.nixvim
@@ -18,7 +16,24 @@ in {
 		extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
 	};
 
-	# programs.nix-ld.enable = true;
+
+	programs.nix-ld.enable = true;
+
+	services.postgresql.enable = true;
+	# prometheus.enable = true;
+	services.prometheus = {
+		enable = true;
+		extraFlags = ["--enable-feature=otlp-write-receiver"];
+		globalConfig.scrape_interval = "10s"; # "1m"
+			scrapeConfigs = [
+			{
+				job_name = "node";
+				static_configs = [{
+					targets = [ "localhost:${toString 14269}" ];
+				}];
+			}
+			];
+	};
 
 	programs.virt-manager.enable = true;
 	users.groups.libvirtd.members = ["im2sleepy"];
@@ -36,9 +51,17 @@ in {
 		enable = true;
 	};
 
+	programs.fzf.keybindings = true;
+	programs.fzf.fuzzyCompletion = true;
+
+
 	users.defaultUserShell = pkgs.zsh;
 	programs.zsh = {
 		enable = true;
+		shellAliases = { 
+			nav = "cd && cd $(find * -maxdepth 3 -mindepth 1 -type d | fzf)";
+			notes = "nvim $(find ~/doc -maxdepth 2 -mindepth 1 -type f | fzf --preview 'cat {}')";
+		};
 		enableCompletion = true;
 		autosuggestions.enable = true;
 		syntaxHighlighting.enable = true;
@@ -51,6 +74,9 @@ in {
         initialPassword = "123";
         extraGroups = [ "wheel" "libvirtd" "audio" "networkmanager" "dialout" "usb" "docker"];
         packages = with pkgs; [
+			slint-lsp
+			fzf
+			pgadmin4-desktopmode
 			virt-manager
 			sof-firmware
 			lldb
@@ -82,5 +108,6 @@ in {
 		docker
     ];
 
+	
   system.stateVersion = "24.05"; # Did you read the comment?
 }
