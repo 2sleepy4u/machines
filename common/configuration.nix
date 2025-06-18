@@ -15,7 +15,8 @@
 	services.xserver.xkb.layout = "it";
     i18n.defaultLocale = "it_IT.UTF-8";
     console = {
-        font = "Lat2-Terminus16";
+        # font = "Lat2-Terminus16";
+		font = "FiraCode";
         useXkbConfig = true; 
     };
     fonts.packages = with pkgs; [

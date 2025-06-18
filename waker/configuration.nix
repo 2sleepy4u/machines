@@ -61,6 +61,7 @@
 		shellAliases = { 
 			nav = "cd && cd $(find * -maxdepth 3 -mindepth 1 -type d | fzf)";
 			notes = "nvim $(find ~/doc -maxdepth 2 -mindepth 1 -type f | fzf --preview 'cat {}')";
+			c = "xclip";
 		};
 		enableCompletion = true;
 		autosuggestions.enable = true;
@@ -74,6 +75,7 @@
         initialPassword = "123";
         extraGroups = [ "wheel" "libvirtd" "audio" "networkmanager" "dialout" "usb" "docker"];
         packages = with pkgs; [
+			xclip
 			slint-lsp
 			fzf
 			pgadmin4-desktopmode
