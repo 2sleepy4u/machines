@@ -33,9 +33,19 @@
 		];
 		keymaps = [
 		{
-			key = "<Leader>r";
+			key = "<C-w>N";
+			mode = "n";
+			action =  ":vnew<CR>";
+		}
+		{
+			key = "<Leader>rn";
 			mode = "n";
 			action =  "<cmd>lua vim.lsp.buf.rename()<CR>";
+		}
+		{
+			key = "<Leader>rf";
+			mode = "n";
+			action =  "<cmd>lua vim.lsp.buf.references()<CR>";
 		}
 		{
 			key = "gd";
@@ -116,6 +126,16 @@
 			key = "<C-Tab>";
 			mode = "n";
 			action = ":DapToggleBreakpoint<CR>";
+		}
+		{
+			key = "<leader>os";
+			mode = "n";
+			action = ":ObsidianSearch ";
+		}
+		{
+			key = "<leader>ot";
+			mode = "n";
+			action = ":ObsidianTags<CR>";
 		}
 	    ];
 		plugins = {
