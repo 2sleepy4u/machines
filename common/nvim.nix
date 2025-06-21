@@ -17,6 +17,7 @@
 			foldlevel = 20;
 			autoread = true;
 			ignorecase = true;
+			conceallevel = 2;
 		};
 		autoCmd = [
 		{
@@ -32,9 +33,19 @@
 		];
 		keymaps = [
 		{
-			key = "<Leader>r";
+			key = "<C-w>N";
+			mode = "n";
+			action =  ":vnew<CR>";
+		}
+		{
+			key = "<Leader>rn";
 			mode = "n";
 			action =  "<cmd>lua vim.lsp.buf.rename()<CR>";
+		}
+		{
+			key = "<Leader>rf";
+			mode = "n";
+			action =  "<cmd>lua vim.lsp.buf.references()<CR>";
 		}
 		{
 			key = "gd";
@@ -47,9 +58,9 @@
 			action = "<cmd>lua vim.lsp.buf.definition()<CR>";
 		}
 		{
-			key = "<Tab>";
+			key = "<Leader><Tab>";
 			mode = "n";
-			action = ":Lexplore<CR>";
+			action = ":Oil<CR>";
 		}
 		{
 			key = "<Leader>E";
@@ -75,6 +86,11 @@
 			key = "<leader>ps";
 			mode = "n";
 			action = ":lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep > ') })<CR>";
+		}
+		{
+			key = "<leader>pt";
+			mode = "n";
+			action = ":lua require('telescope.builtin').grep_string({ search = vim.fn.expand('<cword>') })<CR>";
 		}
 		{
 			key = "<C-p>";
@@ -111,8 +127,19 @@
 			mode = "n";
 			action = ":DapToggleBreakpoint<CR>";
 		}
+		{
+			key = "<leader>os";
+			mode = "n";
+			action = ":ObsidianSearch ";
+		}
+		{
+			key = "<leader>ot";
+			mode = "n";
+			action = ":ObsidianTags<CR>";
+		}
 	    ];
 		plugins = {
+			oil.enable = true;
 			telescope.enable = true;
 			telescope.extensions.ui-select.enable = true;
 			treesitter.enable = true;
@@ -125,12 +152,42 @@
 			#rust-tools.enable = true;
 			cmp_luasnip.enable = true;
 			luasnip.enable = true;
+			obsidian = {
+				enable = true;
+				settings.workspaces = [
+					{
+						name = "work";
+						path = "~/doc/work";
+					}
+				{
+						name = "pers";
+						path = "~/doc/pers";
+					}
+				];
+			};
 		};
 		extraPlugins = with pkgs.vimPlugins; [
 			edgedb-vim
 			nvim-dap
 			actions-preview-nvim
-		];
+			hologram-nvim
+		]; 
+		extraConfigLua = "
+			require('hologram').setup({
+				auto_display = true
+			})
+		";
+		# ++ 
+		# 	[(pkgs.vimUtils.buildVimPlugin {
+		# 		name = "rust-owl";
+		# 		src = pkgs.fetchFromGitHub {
+		# 			owner = "cordx56";
+		# 			repo = "rustowl";
+		# 			tag = "v0.2.1";
+		# 			# hash = "<nix NAR hash>";
+		# 		};
+		# 	})];
+
 
 
 		plugins.cmp = {
@@ -182,6 +239,7 @@
 		plugins.lsp = {
 			enable = true;
 			servers = {
+				ruby_lsp.enable = true;
 				slint_lsp = {
 					enable = true;
 					cmd = ["slint-lsp"];
@@ -189,7 +247,16 @@
 				};
 				qmlls.enable = true;
 				ts_ls.enable = true;
-				clangd.enable = true;
+				clangd = {
+					enable = true;
+					extraOptions = {
+						cmd = [
+							"clangd"
+							"--background-index"
+							"--clang-tidy"
+						];
+					};
+				};
 				elmls.enable = true;
 				nixd.enable = true;
 				lua_ls.enable = true;
@@ -197,7 +264,7 @@
 				pyright.enable = true;
 				gopls.enable = true;
 				templ.enable = true;
-				roc_ls.enable = true;
+				# roc_ls.enable = true;
 				rust_analyzer = {
 					enable = true;
 					installCargo = true;
