@@ -12,6 +12,8 @@
 
     time.timeZone = "Europe/Rome";
 
+	
+
 	services.xserver.xkb.layout = "it";
     i18n.defaultLocale = "it_IT.UTF-8";
     console = {
@@ -21,7 +23,9 @@
     fonts.packages = with pkgs; [
 		fira-code
 		fira-code-symbols
-		(nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+		(nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "JetBrainsMono" ]; })
+		comic-mono
+		font-awesome
     ];
 
 	programs.tmux.enable = true;
@@ -35,6 +39,8 @@
 
     networking.networkmanager.enable = true;  
     environment.systemPackages = with pkgs; [
+		jdk
+		libusb1
 		ffmpeg
 		#kdePackages.qtwayland
 		libheif
