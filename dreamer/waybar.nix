@@ -21,26 +21,16 @@ in
 		enable = true;
 		systemd.enable = true;
 		settings.secondBar = {
-			width = 20;
-			modules-left = [
-				"hyprland/workspaces"
-			];
-			modules-right = [
-
-			];
+			width = 15;
+			modules-left = [];
+			modules-right = [];
 			modules-center = [
 				#"bluetooth" 
 				"network"
 				"pulseaudio"
-				"pulseaudio/slider"
 				"clock"
 				"battery"
 			];
-			"pulseaudio/slider" = {
-				min = 0;
-				max = 200;
-				orientation = "vertical";
-			};
 			position = "left";
 			battery = {
 				states = {
@@ -52,9 +42,9 @@ in
 				format-icons = [""  "" "" "" ""];
 			};
 			pulseaudio = {
-				format = "{icon}";
-				format-bluetooth = "{icon} ";
-				format-muted = "";
+				format = "{volume} {icon}";
+				format-bluetooth = "{volume} {icon} ";
+				format-muted = "M ";
 				format-icons = {
 					#"alsa_output.pci-0000_00_1f.3.analog-stereo" = "";
 					"alsa_output.pci-0000_00_1f.3.analog-stereo-muted" = "";
@@ -66,9 +56,10 @@ in
 				on-click = "pavucontrol";
 			};
 			network = {	
-				format-wifi = "  {essid}";
-				format-ethernet = "{cidr}";
+				format-wifi = " ";
+				format-ethernet = "";
 				format-disconnected = "⚠";
+				tooltip-format = "{essid}";
 				max-length = 10;
 			};
 			bluetooth = {
@@ -79,80 +70,23 @@ in
 				#on-click = "hyprctl dispatch exec float blueberry";
 			};
 		};
-		/*
-		settings.miniBar = {
-			height = 30;
-			modules-center = [
-				"custom/playerctl#backward" "custom/playerctl#play" "custom/playerctl#forward"
-				#"custom/playerlabel" 
-			];
-			modules-left = [ "hyprland/workspaces" ];
-			modules-right = [ 
-				"power-profiles_daemon"
-				"keyboard-state"
-				#"temperature"
-				];
-			position = "bottom";
-			keyboard-state = {
-				capslock = true;
-				format = "{name} {icon}";
-					format-icons = {
-						locked = "";
-						unlocked = "";
-					};
-			};
 		
-			"custom/playerctl#backward"= {
-				format= "󰙣 "; 
-				on-click= "playerctl previous";
-				on-scroll-up = "playerctl volume .05+";
-				on-scroll-down = "playerctl volume .05-";
-			};
-			"custom/playerctl#play"= {
-				format= "{icon}";
-				return-type= "json";
-				exec= "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
-				on-click= "playerctl play-pause";
-				on-scroll-up = "playerctl volume .05+";
-				on-scroll-down = "playerctl volume .05-";
-				format-icons= {
-					Playing = "<span>󰏥 </span>";
-					Paused = "<span> </span>";
-					Stopped = "<span> </span>";
-				};
-			};
-			"custom/playerctl#forward"= {
-				format= "󰙡 ";
-				on-click= "playerctl next";
-				on-scroll-up = "playerctl volume .05+";
-				on-scroll-down = "playerctl volume .05-";
-			};
-			"custom/playerlabel"= {
-				format= "<span>󰎈 {} 󰎈</span>";
-				return-type= "json";
-				max-length= 40;
-				exec = "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
-				on-click= "";
-			};		
-		};
-		*/
 		 style = ''
+			#pulseaudio-slider slider {
+				border-radius: 5px;
+			}
 
-		#pulseaudio-slider slider {
-			border-radius: 5px;
-		}
-
-		#pulseaudio-slider trough {
-			min-height: 80px;
-			min-width: 10px;
-			border-radius: 5px;
-			background-color: black;
-		}
-		#pulseaudio-slider highlight {
-			min-width: 10px;
-			border-radius: 5px;
-			background-color: purple;
-		}
+			#pulseaudio-slider trough {
+				min-height: 80px;
+				min-width: 10px;
+				border-radius: 5px;
+				background-color: black;
+			}
+			#pulseaudio-slider highlight {
+				min-width: 10px;
+				border-radius: 5px;
+				background-color: purple;
+			}
             * {
                 border: none;
                 border-radius: 0px;

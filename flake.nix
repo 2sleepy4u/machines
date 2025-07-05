@@ -2,15 +2,15 @@
     description = "2sleepy4uu";
     inputs = {
         nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-		nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+		nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 		unstable-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 		catppuccin.url = "github:catppuccin/nix";
 		nixvim = {
-			url = "github:nix-community/nixvim/nixos-24.11";
+			url = "github:nix-community/nixvim/nixos-25.05";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 		home-manager = {
-			url = "github:nix-community/home-manager/release-24.11";
+			url = "github:nix-community/home-manager/release-25.05";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 		disko = {
@@ -37,7 +37,7 @@
                 modules = [
                     nixos-wsl.nixosModules.default
                     {
-                        system.stateVersion = "24.05";
+                        system.stateVersion = "25.05";
 						wsl.defaultUser = "im2sleepy";
                         wsl.enable = true;
 						wsl.usbip.enable = true;
@@ -105,12 +105,12 @@
 				specialArgs = { nixvim = nixvim; };
 				modules = [
                     ./rem/configuration.nix
-                        home-manager.nixosModules.home-manager {
-                            home-manager.useGlobalPkgs = true;
-                            home-manager.useUserPackages = true;
-                            home-manager.extraSpecialArgs = { inherit inputs; };
-                            home-manager.users.im2sleepy = import ./rem/home.nix;
-                        }
+                        # home-manager.nixosModules.home-manager {
+                        #     home-manager.useGlobalPkgs = true;
+                        #     home-manager.useUserPackages = true;
+                        #     home-manager.extraSpecialArgs = { inherit inputs; };
+                        #     home-manager.users.im2sleepy = import ./rem/home.nix;
+                        # }
                 ];
             };
         };

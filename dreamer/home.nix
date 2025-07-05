@@ -3,7 +3,7 @@
 	imports = [
 		inputs.nixvim.homeManagerModules.nixvim
 		inputs.catppuccin.homeManagerModules.catppuccin
-		../dreamer/nvim.nix
+		../common/nvim.nix
 		../common/mpv.nix
 		../common/git.nix
 		./waybar.nix
@@ -37,6 +37,7 @@
 
 	home.packages = with pkgs; [
 		#programs
+		eww-wayland
 		brave
 		spotify
 		discord
