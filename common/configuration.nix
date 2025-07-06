@@ -35,7 +35,7 @@
 	programs.tmux = {
 		enable = true;
 		keyMode = "vi";
-		shortcut = "Space";
+		shortcut = "a";
 		extraConfig = ''
 			unbind & 
 			bind -r k kill-window
@@ -56,7 +56,7 @@
 
     networking.networkmanager.enable = true;  
     environment.systemPackages = with pkgs; [
-		(import ../scripts/fuzzy-finder.nix { inherit pkgs; })
+		(import ../scripts/fuzzy-finder.nix { inherit pkgs; inherit lib; })
 		jdk
 		libusb1
 		ffmpeg
