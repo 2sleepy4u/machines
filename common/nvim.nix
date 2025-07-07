@@ -171,10 +171,25 @@
 			nvim-dap
 			actions-preview-nvim
 			hologram-nvim
+			(pkgs.vimUtils.buildVimPlugin {
+				 name = "marp";
+				 src = pkgs.fetchFromGitHub {
+				 owner = "mpas";
+				 repo = "marp-nvim";
+				 rev = "4f38e6ffe2f5ea260f35f7ff3e4e424b9f8bea29";
+				 hash = "sha256-CebyoqIBi8xT5U+aCBwptOSz89KxhXS27kAtPrRZvT8=";
+				 };
+			 })
 		]; 
 		extraConfigLua = "
 			require('hologram').setup({
 				auto_display = true
+			})
+
+			require('marp').setup({
+				port = 8080,
+				wait_for_response_timeout = 30,
+				wait_for_response_delay = 1,
 			})
 		";
 		# ++ 
