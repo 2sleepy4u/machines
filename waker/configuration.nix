@@ -14,12 +14,18 @@
 	xdg.portal = {
 		enable = true;
 		extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+		config.common.default = "*";
 	};
 
 
 	programs.nix-ld.enable = true;
 
 	services.postgresql.enable = true;
+	services.pgadmin = {
+		enable = true;
+		initialEmail = "riccardo.zancan@aqc-industry.com";
+		initialPasswordFile = ../pswd;
+	};
 	# prometheus.enable = true;
 	services.prometheus = {
 		enable = true;
