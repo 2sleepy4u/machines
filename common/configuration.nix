@@ -33,9 +33,13 @@
 	];
 
 
+	environment.sessionVariables = {
+		EDITOR = "nvim";
+	};
 
     networking.networkmanager.enable = true;  
     environment.systemPackages = with pkgs; [
+		glow
 		ffmpeg
 		#kdePackages.qtwayland
 		libheif
