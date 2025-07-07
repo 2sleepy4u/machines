@@ -13,11 +13,21 @@
     boot.supportedFilesystems = [ "ntfs" "hfs+" "hfsplus"];
     services.xserver.videoDrivers = [ "modesetting" ];
     boot.kernelModules = [ "i915"  "snd_hda_intel" "snd_soc_skl"];
+	services.udev.enable = true;
+	services.udev.extraRules = ''
+		SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3748", MODE="0666", GROUP="plugdev"
+		SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="374b", MODE="0666", GROUP="plugdev"
+		SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3752", MODE="0666", GROUP="plugdev"
+		'';
+
     #nix-shell -p pciutils --run "lspci -nn | grep VGA"
     #to get device id [8086:<divice ID>]
-	boot.kernelPackages = pkgs.linuxPackages_6_11;
-    boot.kernelParams = [ "i915.force_probe=7d55" ]; hardware.enableRedistributableFirmware = true; hardware.graphics.extraPackages = with pkgs; [ vpl-gpu-rt ];
+	boot.kernelPackages = pkgs.linuxPackages_6_15;
+    boot.kernelParams = [ "i915.force_probe=7d55" ]; 
+	hardware.enableRedistributableFirmware = true; 
+	hardware.graphics.extraPackages = with pkgs; [ vpl-gpu-rt ];
     hardware.pulseaudio.enable = false;
+	services.ollama.enable = true;
 	services.pipewire = {
 		enable = true;
 		alsa.enable = true;
@@ -35,6 +45,12 @@
 		autosuggestions.enable = true;
 		syntaxHighlighting.enable = true;
 	};
+
+	services.usbmuxd = {
+		enable = true;
+		package = pkgs.usbmuxd2;
+	};
+
 
 	programs.kdeconnect = {
 		enable = true;
