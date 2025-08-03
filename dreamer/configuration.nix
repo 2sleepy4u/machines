@@ -1,13 +1,9 @@
 { lib, config, pkgs, ... }:
 {
-    imports =
-        [ 
-		../common/users.nix
-		../common/desktop.nix
-        ../common/configuration.nix
-		../common/virt.nix
-        ./hardware-configuration.nix
-        ];
+	imports =
+		[ 
+		./hardware-configuration.nix
+		];
 
 
     boot.supportedFilesystems = [ "ntfs" "hfs+" "hfsplus"];

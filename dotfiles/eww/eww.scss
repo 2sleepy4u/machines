@@ -18,5 +18,7 @@
 .bottomstuff {
   @extend .sidestuff;
   background-color: rgba(0.0, 0.0, 0.0, 0.3);
+  padding-left: 5px;
+  padding-right: 5px;
   border-radius: 9px;
 }

@@ -3,11 +3,10 @@
 	imports = [
 		inputs.nixvim.homeManagerModules.nixvim
 		inputs.catppuccin.homeManagerModules.catppuccin
-		../common/nvim.nix
-		../common/mpv.nix
-		../common/git.nix
-		./waybar.nix
-		../common/wlogout.nix
+		../modules/nvim.nix
+		../modules/mpv.nix
+		../modules/git.nix
+		../modules/wlogout.nix
 	];
 
 	home.stateVersion = "24.05";
@@ -34,10 +33,17 @@
 	services.dunst.catppuccin.enable = true;
 	services.dunst.catppuccin.flavor = "mocha";
 
+	programs.eww.enable = true;
+	xdg.configFile = {
+		"eww" = {
+			source =  ./../dotfiles/eww;
+			recursive = true;
+		};
+    };
 
 	home.packages = with pkgs; [
 		#programs
-		eww-wayland
+		eww
 		brave
 		spotify
 		discord
@@ -47,7 +53,7 @@
 		xfce.thunar
 
 		gnome-network-displays
-	brightnessctl
+		brightnessctl
 
 		#utility
 		imv
@@ -66,8 +72,7 @@
 		slurp
 		alacritty
 		wpaperd
-		wayvnc
-		waybar
+		# wayvnc
 		playerctl
 		#swaybg
 		wofi

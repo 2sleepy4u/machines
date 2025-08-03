@@ -63,19 +63,18 @@
                 system = "x86_64-linux";
                 specialArgs = { nixvim = nixvim; };
                 modules = [
+					catppuccin.nixosModules.catppuccin
                     ./dreamer/configuration.nix
-                        #unstable-home-manager.nixosModules.home-manager {
-                        home-manager.nixosModules.home-manager {
-                            home-manager.useGlobalPkgs = true;
-                            home-manager.useUserPackages = true;
-                            home-manager.extraSpecialArgs = { inherit inputs; };
-                            home-manager.users.im2sleepy = {
-								imports = [
-									./dreamer/home.nix
-									#catppuccin.homeManagerModules.catppuccin
-								];
-							};
-                        }
+					./modules/users.nix
+					./modules/desktop.nix
+					./modules/configuration.nix
+					./modules/virt.nix
+					home-manager.nixosModules.home-manager {
+						home-manager.useGlobalPkgs = true;
+						home-manager.useUserPackages = true;
+						home-manager.extraSpecialArgs = { inherit inputs; };
+						home-manager.users.im2sleepy = import ./dreamer/home.nix;
+					}
                 ];
             };
 
