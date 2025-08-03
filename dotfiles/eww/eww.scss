@@ -1,0 +1,22 @@
+* {
+  all: unset;
+}
+
+.clock-text {
+  font-size: 48px;
+  color: white;
+  font-weight: bold;
+  font-family: "Yuji Boku", serif;
+}
+
+.sidestuff {
+  font-weight: bold;
+  font-family: "Yuji Boku", serif;
+}
+
+
+.bottomstuff {
+  @extend .sidestuff;
+  background-color: rgba(0.0, 0.0, 0.0, 0.3);
+  border-radius: 9px;
+}

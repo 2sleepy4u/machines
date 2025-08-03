@@ -22,6 +22,7 @@
         useXkbConfig = true; 
     };
     fonts.packages = with pkgs; [
+		google-fonts
 		fira-code
 		fira-code-symbols
 		nerd-fonts.fira-code
@@ -60,6 +61,7 @@
     networking.networkmanager.enable = true;  
     environment.systemPackages = with pkgs; [
 		glow
+		pulseaudio
 		(import ../scripts/fuzzy-finder.nix { inherit pkgs; inherit lib; })
 		jdk
 		libusb1

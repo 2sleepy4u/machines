@@ -1,0 +1,7 @@
+(defpoll battery :interval "1m"
+ "cat /sys/class/power_supply/BAT0/capacity"
+)
+
+(defwidget w-battery []
+	(label :text "${battery}%")
+)

@@ -1,0 +1,9 @@
+(defwidget clock []
+  (box :class "clock-text" :orientation "h" :space-evenly false :halign "center"
+        time))
+
+(defpoll time :interval "10s"
+  "date '+%H:%M'")
+
+
+

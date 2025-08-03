@@ -1,0 +1,18 @@
+(deflisten volume :initial "{\"volume\": 50, \"muted\": false}"
+  "~/.config/eww/scripts/volume.sh"
+)
+
+(defwidget w-volume []
+	(label 
+		:text 
+			 {volume.muted == true ?
+				  "" :
+				  "${volume.volume}"
+			  }
+			
+	)
+)
+
+
+
+
