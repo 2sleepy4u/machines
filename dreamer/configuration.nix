@@ -51,7 +51,6 @@
 	programs.kdeconnect = {
 		enable = true;
 		package = pkgs.kdePackages.kdeconnect-kde;
-		#indicator = true;
 	};
 	services.fprintd.enable = true;
 
@@ -59,7 +58,7 @@
     networking.firewall = {
         enable = true;
         allowedTCPPorts = [ 
-    #spotify
+			#spotify
             57621
             4840
             4855
