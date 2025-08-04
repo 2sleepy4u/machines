@@ -139,6 +139,7 @@
 		}
 	    ];
 		plugins = {
+			lualine.enable = true;
 			oil.enable = true;
 			telescope.enable = true;
 			telescope.extensions.ui-select.enable = true;
@@ -254,6 +255,7 @@
 		plugins.lsp = {
 			enable = true;
 			servers = {
+				postgres_lsp.enable = true;
 				ruby_lsp.enable = true;
 				slint_lsp = {
 					enable = true;

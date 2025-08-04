@@ -1,13 +1,10 @@
-{ pkgs, lib }:
+{ pkgs, lib, dir_list, fixed_dir_list }:
 
-let 
-	dir_list = [ "~/dev" "~/doc" "~/nixos" ];
-in
 pkgs.writeShellScriptBin "f" ''
 	if [[ $# -eq 1 ]]; then
 		selected=$1
 	else
-		selected=$(find ${lib.strings.concatStringsSep " " dir_list} -mindepth 1 -maxdepth 1 -type d | fzf)
+		selected=$({ find ${lib.strings.concatStringsSep " " dir_list} -mindepth 1 -maxdepth 1 -type d; printf "%s\n" ${lib.strings.concatStringsSep " " fixed_dir_list}; } | fzf)
 	fi
 
 	if [[ -z $selected ]]; then

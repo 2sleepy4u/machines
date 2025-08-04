@@ -42,6 +42,9 @@
 
 			unbind c 
 			bind -r Enter new-window
+
+			unbind f 
+			bind -r f display-popup -E -w 80% -h 80% -T "Open workspace" "f"
 		'';
 		baseIndex = 1;
 		plugins = with pkgs.tmuxPlugins; [ 
@@ -60,8 +63,9 @@
     networking.networkmanager.enable = true;  
     environment.systemPackages = with pkgs; [
 		glow
-		(import ../scripts/fuzzy-finder.nix { inherit pkgs; inherit lib; })
-		jdk
+		
+		jq
+		# jdk
 		libusb1
 		ffmpeg
 		#kdePackages.qtwayland
