@@ -22,7 +22,7 @@
     boot.kernelParams = [ "i915.force_probe=7d55" ]; 
 	hardware.enableRedistributableFirmware = true; 
 	hardware.graphics.extraPackages = with pkgs; [ vpl-gpu-rt ];
-    hardware.pulseaudio.enable = false;
+    services.pulseaudio.enable = false;
 	services.ollama.enable = true;
 	services.pipewire = {
 		enable = true;
@@ -55,6 +55,7 @@
 	services.fprintd.enable = true;
 
     networking.hostName = "dreamer"; 
+    networking.networkmanager.enable = true;  
     networking.firewall = {
         enable = true;
         allowedTCPPorts = [ 

@@ -1,5 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, unstable, lib, ... }:
 {
+	nixpkgs.config.allowUnfree = true;
 	environment.etc."nextcloud-admin-pass".text = "PWD";
 	users.users.nginx = {
 		group = "nginx";
@@ -11,17 +12,20 @@
 		requires = ["mysql.service"];
 		after = ["mysql.service"];
 	};
-	virtualisation.oci-containers.containers.onlyoffice =  {
-		image = "onlyoffice/documentserver:latest";
-		ports = ["8000:80"];
-		environmentFiles = [
-		# config.age.secrets.onlyofficeDocumentServerKey.path
-		];
-	};
+	# virtualisation.oci-containers.containers.onlyoffice =  {
+	# 	image = "onlyoffice/documentserver:latest";
+	# 	ports = [
+	# 		"8000:80"
+	# 		# "8443:443"
+	# 	];
+	# 	environmentFiles = [
+	# 		# config.age.secrets.onlyofficeDocumentServerKey.path
+	# 	];
+	# };
 
 	services = {
 		nginx.virtualHosts."cloud.onirya.it".listen = [ { addr = "192.168.1.250"; port = 8081; }];
-		# nginx.virtualHosts."onlyoffice.onirya.it".listen = [ { addr = "192.168.1.250"; port = 8082; }];
+		nginx.virtualHosts."localhost".listen = [ { addr = "192.168.1.250"; port = 8082; }];
 		nextcloud = {
 			enable = true;
 			package = pkgs.nextcloud30;
@@ -86,8 +90,9 @@
 			];
 		};
 		onlyoffice = {
-			enable = false;
-			hostname = "onlyoffice.onirya.it";
+			enable = true;
+			package = unstable.onlyoffice-documentserver;
+			hostname = "localhost";
 			jwtSecretFile = "";
 		};
 	};

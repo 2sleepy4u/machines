@@ -1,0 +1,13 @@
+{ pkgs, ... }:
+{
+	time.timeZone = "Europe/Rome";
+
+
+	services.xserver.xkb.layout = "it";
+	i18n.defaultLocale = "it_IT.UTF-8";
+	console = {
+		font = "Lat2-Terminus16";
+		useXkbConfig = true; 
+	};
+
+}

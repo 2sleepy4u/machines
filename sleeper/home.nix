@@ -4,10 +4,10 @@
 		inputs.nixvim.homeManagerModules.nixvim
 		inputs.catppuccin.homeManagerModules.catppuccin
 		./nvim.nix
-		../common/mpv.nix
-		../common/git.nix
-		../common/waybar.nix
-		../common/wlogout.nix
+		../modules/mpv.nix
+		../modules/git.nix
+		../modules/waybar.nix
+		../modules/wlogout.nix
 	];
 
 	home.stateVersion = "23.11";

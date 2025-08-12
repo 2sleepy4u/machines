@@ -2,7 +2,7 @@
 {
 	imports =
 		[ # Include the results of the hardware scan.
-		../common/configuration.nix
+		../modules/configuration.nix
 		./network.nix
 		./users.nix
 		./disk-config.nix
@@ -14,13 +14,13 @@
 		./services/mail.nix
 		./services/ssh.nix
 		./services/cockpit.nix
-		# ./services/samba.nix
+		./services/samba.nix
 		./services/vaultwarden.nix
 
 		#inputs.nix-minecraft-nixosModules.minecraft-servers
 
 		nixvim.nixosModules.nixvim
-		../common/nvim.nix
+		../modules/nvim.nix
 		];
 
 	nixpkgs.config.allowUnfree = true;

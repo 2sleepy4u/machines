@@ -4,9 +4,7 @@
     imports = [
         nixvim.nixosModules.nixvim
         #<nixos-wsl/modules>
-		../common/configuration.nix
-        ../common/nvim.nix
-    ];
+	];
 
     boot.loader.systemd-boot.enable = lib.mkForce false;
 	catppuccin.enable = true;
