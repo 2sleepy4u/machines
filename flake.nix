@@ -47,6 +47,27 @@
 
                 ];
             };
+
+			oneironaut = nixpkgs.lib.nixosSystem {
+                system = "x86_64-linux";
+				modules = [
+					./modules/users.nix
+					./modules/desktop.nix
+
+					./modules/common.nix
+
+					./modules/tmux.nix
+					./modules/font.nix
+					./modules/locale.nix
+
+
+					home-manager.nixosModules.home-manager {
+						home-manager.useGlobalPkgs = true;
+						home-manager.useUserPackages = true;
+						home-manager.users.im2sleepy = import ./oneironaut/home.nix;
+					}
+				];
+			};
             
             dreamer = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
@@ -62,6 +83,7 @@
 					./modules/tmux.nix
 					./modules/font.nix
 					./modules/locale.nix
+
 					home-manager.nixosModules.home-manager {
 						home-manager.useGlobalPkgs = true;
 						home-manager.useUserPackages = true;
