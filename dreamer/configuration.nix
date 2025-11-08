@@ -6,6 +6,18 @@
 		];
 
 
+	services.postgresql = {
+		enable = true;
+		ensureDatabases = [ "im2sleepy" ];
+		ensureUsers = [
+		{
+			name = "im2sleepy";
+			ensureDBOwnership = true;
+		}
+		];
+	};
+	
+
     boot.supportedFilesystems = [ "ntfs" "hfs+" "hfsplus"];
     services.xserver.videoDrivers = [ "modesetting" ];
     boot.kernelModules = [ "i915"  "snd_hda_intel" "snd_soc_skl"];
