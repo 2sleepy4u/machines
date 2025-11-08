@@ -139,6 +139,9 @@
 		}
 	    ];
 		plugins = {
+			vim-dadbod.enable = true;
+			vim-dadbod-ui.enable = true;
+			vim-dadbod-completion.enable = true;
 			oil.enable = true;
 			telescope.enable = true;
 			telescope.extensions.ui-select.enable = true;
@@ -211,6 +214,7 @@
 					{name = "path";}
 					{name = "buffer";}
 					{name = "luasnip";}
+					{name = "vim-dadbod-completion";}
 					];
 
 				snippet = {
