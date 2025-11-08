@@ -1,5 +1,5 @@
 (defpoll battery :interval "1m"
- "cat /sys/class/power_supply/BAT0/capacity"
+ "../scripts/battery.sh | cat"
 )
 
 (defwidget w-battery []
