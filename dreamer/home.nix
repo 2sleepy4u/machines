@@ -43,21 +43,35 @@
 				blur_size = 7;
 			}
 			];
+			label = {
+				text = "cmd[update:1000] echo \"<span>$(date +\"%I:%M\")</span>\"";
+				color = "rgba(216, 222, 233, 0.70)";
+				font_size = 120;
+				font_family = "SF Pro Display Bold";
+				position = "0, 250";
+				halign = "center";
+				valign = "center";
+			};
 
-			input-field = [
-			{
-				size = "400, 100";
-				position = "0, 0";
-				monitor = "";
+			input-field = [{
+			 	size = "400, 100";
+				outline_thickness = 2;
+				dots_size = 0.2; # Scale of input-field height, 0.2 - 0.8
+				dots_spacing = 0.2; # Scale of dots' absolute size, 0.0 - 1.0
 				dots_center = true;
+				outer_color = "rgba(0, 0, 0, 0)";
+				inner_color = "rgba(255, 255, 255, 0.1)";
+				font_color = "rgb(200, 200, 200)";
 				fade_on_empty = false;
-				outline_thickness = 5;
-				placeholder_text = "<i>Password...</i>";
-				shadow_passes = 2;
-			}
-			];
+				placeholder_text = "<i><span foreground=\"##ffffff99\">Enter Pass</span></i>";
+				hide_input = false;
+				position = "0, 0";
+				halign = "center";
+				valign = "center";
+			}];
+
 		};
-		};
+	};
 	programs.hyprlock.catppuccin.enable = true;
 	programs.hyprlock.catppuccin.flavor = "mocha";
 
@@ -67,6 +81,22 @@
 	services.dunst.enable = true;
 	services.dunst.catppuccin.enable = true;
 	services.dunst.catppuccin.flavor = "mocha";
+	services.dunst.settings = {
+		global = {
+			width = "(0, 300)";
+
+			corner_radius = 8;           
+			origin = "bottom-right";
+			offset = "0x20";
+
+
+			max_icon_size = 64;
+			text_icon_padding = 0;
+
+			word_wrap = "yes";
+			ellipsize = "middle";
+		};
+	};
 
 	programs.eww.enable = true;
 	xdg.desktopEntries = {
