@@ -29,7 +29,7 @@
 		package = pkgs.kdePackages.sddm;
 	};
 
-	programs.hyprlock.enable = true;
+	# programs.hyprlock.enable = true;
 
 	security.pam.services.swaylock.text = ''auth Include login '';
 

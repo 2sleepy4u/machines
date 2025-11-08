@@ -23,12 +23,30 @@
 	hardware.enableRedistributableFirmware = true; 
 	hardware.graphics.extraPackages = with pkgs; [ vpl-gpu-rt ];
     services.pulseaudio.enable = false;
-	services.ollama.enable = true;
+	# services.ollama.enable = true;
 	services.pipewire = {
 		enable = true;
 		alsa.enable = true;
 		pulse.enable = true;
+		jack.enable = true;
+		extraConfig.jack = {
+			"92-low-latency" = {
+				"context.properties" = {
+				  "default.clock.rate" = 48000;
+				  "default.clock.quantum" = 32;
+				  "default.clock.min-quantum" = 32;
+				  "default.clock.max-quantum" = 32;
+				};
+			};
+		};
 	};
+	# services.jack = {
+	# 	jackd.enable = true;
+	# 	alsa.enable = true;
+	# 	loopback = {
+	# 		enable = true;
+	# 	};
+	# };
 
 	users.defaultUserShell = pkgs.zsh;
 	virtualisation.docker.enable = true;

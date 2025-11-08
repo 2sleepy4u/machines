@@ -3,7 +3,7 @@
     users.users.im2sleepy = {
         isNormalUser = true;
         initialPassword = "123";
-        extraGroups = [ "wheel" "libvirtd" "audio" "networkmanager" "dialout" "usb" "docker"];
+        extraGroups = [ "wheel" "libvirtd" "audio" "networkmanager" "dialout" "usb" "docker" "plugdev"];
         packages = with pkgs; [
 			sof-firmware
 			lldb

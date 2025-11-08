@@ -8,7 +8,10 @@
 
 	xdg.portal = {
 		enable = true;
-		extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+		extraPortals = with pkgs; [ 
+		xdg-desktop-portal-gtk 
+		xdg-desktop-portal-hyprland
+		];
 	};
 
 	environment.sessionVariables = {
@@ -39,6 +42,10 @@
 		libsForQt5.qt5.qtquickcontrols2
 		libsForQt5.qt5.qtgraphicaleffects
 		xdg-desktop-portal-gtk
+		xdg-desktop-portal-hyprland
 		fzf
+		catppuccin-cursors.mochaLight
+		catppuccin-cursors.mochaDark
+		steam-run
     ];
 }
