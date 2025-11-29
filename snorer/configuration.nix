@@ -14,7 +14,7 @@
 		./services/mail.nix
 		./services/ssh.nix
 		./services/cockpit.nix
-		./services/samba.nix
+		# ./services/samba.nix
 		./services/vaultwarden.nix
 
 		#inputs.nix-minecraft-nixosModules.minecraft-servers
