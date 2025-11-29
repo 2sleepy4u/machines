@@ -2,7 +2,7 @@
 {
 	imports =
 		[ # Include the results of the hardware scan.
-		../modules/configuration.nix
+		../modules/common.nix
 		./network.nix
 		./users.nix
 		./disk-config.nix
