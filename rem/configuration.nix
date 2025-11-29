@@ -36,7 +36,7 @@
     };
 
 
-	programs.hyprland.enable = true;
+	# programs.hyprland.enable = true;
 
     hardware.opengl.enable = true;
     hardware.opengl.driSupport32Bit = true;
@@ -47,17 +47,16 @@
     services.openssh.enable = true;
     services.gvfs.enable = true;
     services.tumbler.enable = true;
+  services.xserver.displayManager.lightdm.enable = false;
 
 	services.xserver.enable = true;
 	services.displayManager.sddm = {
-		enable = true;
+		enable = false;
 		autoLogin.enable = true;
 		autoLogin.user = "rem";
 		theme = "catppuccin-mocha";
 		package = pkgs.kdePackages.sddm;
 	};
-
-	security.pam.services.swaylock.text = ''auth Include login '';
 
 	xdg.portal = {
 		enable = true;

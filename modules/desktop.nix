@@ -5,8 +5,8 @@
 
 	programs.hyprland.enable = true;
 
-    hardware.opengl.enable = true;
-    hardware.opengl.driSupport32Bit = true;
+    hardware.graphics.enable = true;
+    hardware.graphics.enable32Bit = true;
     hardware.enableAllFirmware = true;
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
@@ -28,6 +28,8 @@
 		theme = "catppuccin-mocha";
 		package = pkgs.kdePackages.sddm;
 	};
+
+	# programs.hyprlock.enable = true;
 
 	security.pam.services.swaylock.text = ''auth Include login '';
 

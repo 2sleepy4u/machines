@@ -31,9 +31,7 @@
         nixosConfigurations = {
             waker = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
-                specialArgs = { 
-					nixvim = nixvim; 
-				};
+                specialArgs = { inherit nixvim; };
                 modules = [
                     nixos-wsl.nixosModules.default
                     {
@@ -44,38 +42,54 @@
                     }
 					catppuccin.nixosModules.catppuccin
                     ./waker/configuration.nix
+					./modules/configuration.nix
+					./modules/nvim.nix
+
                 ];
             };
-            sleeper = nixpkgs.lib.nixosSystem {
+
+			oneironaut = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
-                specialArgs = { nixvim = nixvim; };
-                modules = [
-                    ./sleeper/configuration.nix
-                        home-manager.nixosModules.home-manager {
-                            home-manager.useGlobalPkgs = true;
-                            home-manager.useUserPackages = true;
-                            home-manager.extraSpecialArgs = { inherit inputs; };
-                            home-manager.users.im2sleepy = import ./sleeper/home.nix;
-                        }
-                ];
-            };
+				modules = [
+					./modules/users.nix
+					./modules/desktop.nix
+
+					./modules/common.nix
+
+					./modules/tmux.nix
+					./modules/font.nix
+					./modules/locale.nix
+
+
+					home-manager.nixosModules.home-manager {
+						home-manager.useGlobalPkgs = true;
+						home-manager.useUserPackages = true;
+						home-manager.users.im2sleepy = import ./oneironaut/home.nix;
+					}
+				];
+			};
+            
             dreamer = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
-                specialArgs = { nixvim = nixvim; };
+                specialArgs = { inherit nixvim; };
                 modules = [
+					# disko.nixosModules.disko
                     ./dreamer/configuration.nix
-                        #unstable-home-manager.nixosModules.home-manager {
-                        home-manager.nixosModules.home-manager {
-                            home-manager.useGlobalPkgs = true;
-                            home-manager.useUserPackages = true;
-                            home-manager.extraSpecialArgs = { inherit inputs; };
-                            home-manager.users.im2sleepy = {
-								imports = [
-									./dreamer/home.nix
-									#catppuccin.homeManagerModules.catppuccin
-								];
-							};
-                        }
+					./modules/users.nix
+					./modules/desktop.nix
+
+					./modules/common.nix
+
+					./modules/tmux.nix
+					./modules/font.nix
+					./modules/locale.nix
+
+					home-manager.nixosModules.home-manager {
+						home-manager.useGlobalPkgs = true;
+						home-manager.useUserPackages = true;
+						home-manager.extraSpecialArgs = { inherit inputs; };
+						home-manager.users.im2sleepy = import ./dreamer/home.nix;
+					}
                 ];
             };
 
@@ -100,17 +114,24 @@
 					./snorer/hardware-configuration.nix
                 ];
             };
+			sleeper = nixpkgs.lib.nixosSystem {
+                system = "x86_64-linux";
+                specialArgs = { nixvim = nixvim; };
+                modules = [
+                    ./sleeper/configuration.nix
+                        home-manager.nixosModules.home-manager {
+                            home-manager.useGlobalPkgs = true;
+                            home-manager.useUserPackages = true;
+                            home-manager.extraSpecialArgs = { inherit inputs; };
+                            home-manager.users.im2sleepy = import ./sleeper/home.nix;
+                        }
+                ];
+            };
 			rem = nixpkgs.lib.nixosSystem {
 				system = "x86_64-linux";
 				specialArgs = { nixvim = nixvim; };
 				modules = [
                     ./rem/configuration.nix
-                        # home-manager.nixosModules.home-manager {
-                        #     home-manager.useGlobalPkgs = true;
-                        #     home-manager.useUserPackages = true;
-                        #     home-manager.extraSpecialArgs = { inherit inputs; };
-                        #     home-manager.users.im2sleepy = import ./rem/home.nix;
-                        # }
                 ];
             };
         };

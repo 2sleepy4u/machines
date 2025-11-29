@@ -1,14 +1,22 @@
 { lib, config, pkgs, ... }:
 {
-    imports =
-        [ 
-		../common/users.nix
-		../common/desktop.nix
-        ../common/configuration.nix
-		../common/virt.nix
-        ./hardware-configuration.nix
-        ];
+	imports =
+		[ 
+		./hardware-configuration.nix
+		];
 
+
+	services.postgresql = {
+		enable = true;
+		ensureDatabases = [ "im2sleepy" ];
+		ensureUsers = [
+		{
+			name = "im2sleepy";
+			ensureDBOwnership = true;
+		}
+		];
+	};
+	
 
     boot.supportedFilesystems = [ "ntfs" "hfs+" "hfsplus"];
     services.xserver.videoDrivers = [ "modesetting" ];
@@ -26,13 +34,31 @@
     boot.kernelParams = [ "i915.force_probe=7d55" ]; 
 	hardware.enableRedistributableFirmware = true; 
 	hardware.graphics.extraPackages = with pkgs; [ vpl-gpu-rt ];
-    hardware.pulseaudio.enable = false;
-	services.ollama.enable = true;
+    services.pulseaudio.enable = false;
+	# services.ollama.enable = true;
 	services.pipewire = {
 		enable = true;
 		alsa.enable = true;
 		pulse.enable = true;
+		jack.enable = true;
+		extraConfig.jack = {
+			"92-low-latency" = {
+				"context.properties" = {
+				  "default.clock.rate" = 48000;
+				  "default.clock.quantum" = 32;
+				  "default.clock.min-quantum" = 32;
+				  "default.clock.max-quantum" = 32;
+				};
+			};
+		};
 	};
+	# services.jack = {
+	# 	jackd.enable = true;
+	# 	alsa.enable = true;
+	# 	loopback = {
+	# 		enable = true;
+	# 	};
+	# };
 
 	users.defaultUserShell = pkgs.zsh;
 	virtualisation.docker.enable = true;
@@ -55,15 +81,15 @@
 	programs.kdeconnect = {
 		enable = true;
 		package = pkgs.kdePackages.kdeconnect-kde;
-		#indicator = true;
 	};
 	services.fprintd.enable = true;
 
     networking.hostName = "dreamer"; 
+    networking.networkmanager.enable = true;  
     networking.firewall = {
         enable = true;
         allowedTCPPorts = [ 
-    #spotify
+			#spotify
             57621
             4840
             4855

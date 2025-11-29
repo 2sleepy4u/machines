@@ -1,0 +1,55 @@
+(include "widgets/time.yuck" )
+(include "widgets/player.yuck" )
+(include "widgets/battery.yuck" )
+(include "widgets/volume.yuck" )
+
+(defwindow clock-window
+  :monitor 0
+  :geometry (geometry :x "50" :y "50" :width "200" :height "100")
+  :stacking "bg" ; keep behind other windows
+  :anchor "top right"
+  :focusable false
+  (clock))
+
+
+
+(defwidget topstuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly true :halign "center"
+        time 
+	))
+
+(defwidget topbar []
+	(box :class "sidestuff" :orientation "h" :space-evenly true :halign "center")
+)
+
+(defwidget bottomstuff []
+	(box :class "bottomstuff" :orientation "h" :space-evenly true :halign "center"
+		(w-battery)
+		song
+		(w-volume)
+	)
+)
+
+
+
+(defwindow bottom-bar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "90%"
+                      :height "10px"
+                      :anchor "bottom center")
+  :reserve (struts :side "top" :distance "4%")
+  (bottomstuff))
+
+(defwindow top-bar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "0%"
+                      :width "90%"
+                      :height "10px"
+                      :anchor "top center")
+  :reserve (struts :side "top" :distance "4%")
+  (topstuff))

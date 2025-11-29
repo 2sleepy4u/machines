@@ -139,6 +139,9 @@
 		}
 	    ];
 		plugins = {
+			vim-dadbod.enable = true;
+			vim-dadbod-ui.enable = true;
+			vim-dadbod-completion.enable = true;
 			lualine.enable = true;
 			oil.enable = true;
 			telescope.enable = true;
@@ -157,12 +160,8 @@
 				enable = true;
 				settings.workspaces = [
 					{
-						name = "work";
-						path = "~/doc/work";
-					}
-				{
-						name = "pers";
-						path = "~/doc/pers";
+						name = "documents";
+						path = "~/doc";
 					}
 				];
 			};
@@ -216,6 +215,7 @@
 					{name = "path";}
 					{name = "buffer";}
 					{name = "luasnip";}
+					{name = "vim-dadbod-completion";}
 					];
 
 				snippet = {

@@ -1,0 +1,7 @@
+(defpoll battery :interval "1m"
+ "../scripts/battery.sh | cat"
+)
+
+(defwidget w-battery []
+	(label :text "${battery}%")
+)

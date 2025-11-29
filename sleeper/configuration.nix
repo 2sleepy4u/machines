@@ -4,10 +4,10 @@
 {
     imports =
         [ # Include the results of the hardware scan.
-		../common/gaming.nix
-		../common/users.nix
-		../common/desktop.nix
-        ../common/configuration.nix
+		../modules/gaming.nix
+		../modules/users.nix
+		../modules/desktop.nix
+        ../modules/configuration.nix
         ./hardware-configuration.nix
         ];
 

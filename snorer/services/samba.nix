@@ -12,20 +12,20 @@
 		openFirewall = true;
 		securityType = "user";
 		settings = {
-			workgroup = "WORKGROUP";
-			"server string" = "server";
-			"netbios name" = "server";
-			security = "user";
-		};
-		shares = {
-			movie = {
-				path = "/mnt/storage/jellyfin/movie";
+			global = {
+				workgroup = "WORKGROUP";
+				"server string" = "server";
+				"netbios name" = "server";
+				security = "user";
+			};
+			movies = {
+				path = "/mnt/media/movies";
 				browseable = "yes";
 				"read only" = "no";
 				"guest ok" = "yes";
 			};
 			music = {
-				path = "/mnt/storage/jellyfin/music";
+				path = "/mnt/media/music";
 				browseable = "yes";
 				"read only" = "no";
 				"guest ok" = "yes";

@@ -1,0 +1,4 @@
+(deflisten song :initial ""
+	"playerctl --follow metadata --format '{{title}} - {{artist}}'"
+)
+
