@@ -73,7 +73,7 @@
                 system = "x86_64-linux";
                 specialArgs = { inherit nixvim; };
                 modules = [
-					# disko.nixosModules.disko
+					disko.nixosModules.disko
                     ./dreamer/configuration.nix
 					./modules/users.nix
 					./modules/desktop.nix
@@ -83,6 +83,8 @@
 					./modules/tmux.nix
 					./modules/font.nix
 					./modules/locale.nix
+
+					./dreamer/disk-config.nix
 
 					home-manager.nixosModules.home-manager {
 						home-manager.useGlobalPkgs = true;
