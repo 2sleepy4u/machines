@@ -25,7 +25,20 @@
 	programs.home-manager.enable = true;
 
 	programs.brave.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform-hint=wayland";
-	programs.starship.enable = true;
+	programs.starship = {
+		enable = true;
+		enableZshIntegration = true;
+	};
+	programs.zsh = {
+		enable = true;
+		enableCompletion = true;
+		autosuggestion.enable = true;
+		syntaxHighlighting.enable = true;
+		oh-my-zsh = {
+			theme = "";
+			enable = true;
+		};
+	};
 	programs.alacritty.enable = true;
 	programs.alacritty.catppuccin.enable = true;
 	programs.alacritty.catppuccin.flavor = "mocha";
@@ -76,7 +89,7 @@
 	programs.hyprlock.catppuccin.flavor = "mocha";
 
 	gtk.enable = true;
-	gtk.catppuccin.enable = true;
+	# gtk.catppuccin.enable = true;
 	gtk.catppuccin.icon.enable = true;
 	services.dunst.enable = true;
 	services.dunst.catppuccin.enable = true;

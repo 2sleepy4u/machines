@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, unstablePkgs, ... }:
 {
     boot.loader.systemd-boot.enable = true;
     boot.loader.systemd-boot.configurationLimit = 3;
@@ -20,9 +20,17 @@
 
     environment.systemPackages = with pkgs; [
 		glow
-		catppuccin-sddm
+			# catppuccin-sddm
+		(catppuccin-sddm.override {
+		 flavor = "mocha";
+		 accent = "mauve";
+		 # font  = "Noto Sans";
+		 # fontSize = "9";
+		 # background = "${./wallpaper.png}";
+		 # loginBackground = true;
+		 })
 		pulseaudio
-		(import ../scripts/fuzzy-finder.nix { inherit pkgs; inherit lib; })
+		(import ../scripts/fuzzy-finder.nix { inherit pkgs; inherit lib; dir_list = []; fixed_dir_list = [];})
 		jdk
 		libusb1
 		ffmpeg
@@ -33,7 +41,7 @@
 		parted
         wget
         efibootmgr
-        amdvlk
+        # amdvlk
         vulkan-tools
 		git
         neofetch
@@ -47,5 +55,6 @@
 		catppuccin-cursors.mochaLight
 		catppuccin-cursors.mochaDark
 		steam-run
+		unstablePkgs.winboat
     ];
 }

@@ -30,7 +30,7 @@
 
     #nix-shell -p pciutils --run "lspci -nn | grep VGA"
     #to get device id [8086:<divice ID>]
-	boot.kernelPackages = pkgs.linuxPackages_6_15;
+	# boot.kernelPackages = pkgs.linuxPackages_6_15;
     boot.kernelParams = [ "i915.force_probe=7d55" ]; 
 	hardware.enableRedistributableFirmware = true; 
 	hardware.graphics.extraPackages = with pkgs; [ vpl-gpu-rt ];
@@ -60,18 +60,12 @@
 	# 	};
 	# };
 
-	users.defaultUserShell = pkgs.zsh;
+	# users.defaultUserShell = pkgs.zsh;
 	virtualisation.docker.enable = true;
 
     hardware.ipu6.enable = true;
 	hardware.ipu6.platform = "ipu6epmtl";
-	programs.zsh = {
-		enable = true;
-		enableCompletion = true;
-		autosuggestions.enable = true;
-		syntaxHighlighting.enable = true;
-	};
-
+	
 	services.usbmuxd = {
 		enable = true;
 		package = pkgs.usbmuxd2;

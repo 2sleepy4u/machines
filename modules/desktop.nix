@@ -4,6 +4,7 @@
     nixpkgs.config.pulseaudio = true;
 
 	programs.hyprland.enable = true;
+	programs.niri.enable = true;
 
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
@@ -25,7 +26,7 @@
 	services.xserver.enable = true;
 	services.displayManager.sddm = {
 		enable = true;
-		theme = "catppuccin-mocha";
+		theme = "catppuccin-mocha-mauve";
 		package = pkgs.kdePackages.sddm;
 	};
 
