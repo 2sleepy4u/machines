@@ -1,4 +1,4 @@
-{ lib, config, pkgs, unstablePkgs, ... }:
+{ lib, config, pkgs, ... }:
 {
     boot.loader.systemd-boot.enable = true;
     boot.loader.systemd-boot.configurationLimit = 3;
@@ -6,14 +6,17 @@
 
     nix.settings.experimental-features = ["nix-command" "flakes"];
 
-	xdg.portal = {
+		xdg.portal = {
 		enable = true;
+		wlr.enable = false;
 		extraPortals = with pkgs; [ 
-		xdg-desktop-portal-gtk 
-		xdg-desktop-portal-hyprland
+			xdg-desktop-portal-gtk 
+			xdg-desktop-portal-gnome 
+			xdg-desktop-portal-wlr 
+			xdg-desktop-portal-hyprland
 		];
+		config.common = {};
 	};
-
 	environment.sessionVariables = {
 		EDITOR = "nvim";
 	};
@@ -54,7 +57,10 @@
 		fzf
 		catppuccin-cursors.mochaLight
 		catppuccin-cursors.mochaDark
+		wayland-utils
+		wayland-protocols
+		xdg-desktop-portal
+		xdg-desktop-portal-wlr
 		steam-run
-		unstablePkgs.winboat
     ];
 }

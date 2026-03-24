@@ -2,7 +2,9 @@
  {
 	 programs.nixvim = {
 		enable = true;
-		globals.mapleader = ";";
+		globals.mapleader = " ";
+		globals.maplocalleader = " ";
+
 		opts = {
 			number = true;
 			relativenumber = true;
@@ -32,6 +34,36 @@
 		}
 		];
 		keymaps = [
+		{
+			mode = "n";
+			key = "<leader>ws";
+			action = ''
+				function()
+				local char = vim.fn.getcharstr()
+
+				local pairs = {
+					['"'] = { '"', '"' },
+					["'"] = { "'", "'" },
+					["("] = { "(", ")" },
+					[")"] = { "(", ")" },
+					["{"] = { "{", "}" },
+					["}"] = { "{", "}" },
+					["["] = { "[", "]" },
+					["]"] = { "[", "]" },
+					["<"] = { "<", ">" },
+					[">"] = { "<", ">" },
+				}
+
+			local surround = pairs[char]
+				if not surround then return end
+
+					local open, close = surround[1], surround[2]
+						vim.cmd('normal! ciw' .. open .. close .. '\27P')
+						end
+						'';
+			lua = true;
+			options.desc = "Surround word";
+		}
 		{
 			key = "<C-w>N";
 			mode = "n";
@@ -85,7 +117,7 @@
 		{
 			key = "<leader>ps";
 			mode = "n";
-			action = ":lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep > ') })<CR>";
+			action = ":lua require('telescope.builtin').live_grep()<CR>";
 		}
 		{
 			key = "<leader>pt";
@@ -160,6 +192,7 @@
 			luasnip.enable = true;
 			obsidian = {
 				enable = true;
+				settings.legacy_commands = false;
 				settings.workspaces = [
 					{
 						name = "documents";
@@ -169,7 +202,6 @@
 			};
 		};
 		extraPlugins = with pkgs.vimPlugins; [
-			edgedb-vim
 			nvim-dap
 			actions-preview-nvim
 			hologram-nvim

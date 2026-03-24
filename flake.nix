@@ -5,6 +5,7 @@
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 		unstable-nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 		catppuccin.url = "github:catppuccin/nix";
+		probe-rs-rules.url = "github:jneem/probe-rs-rules";
 		nixvim = {
 			url = "github:nix-community/nixvim/nixos-25.11";
 			inputs.nixpkgs.follows = "nixpkgs";
@@ -17,12 +18,12 @@
 			url = "github:nix-community/disko";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
-		#nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 	};
 
     outputs = { 
 		self, 
 		catppuccin, 
+		probe-rs-rules,
 		disko,
 		nixpkgs, home-manager, unstable-nixpkgs,
 		nixvim, nixos-wsl, ... 
@@ -49,9 +50,13 @@
             };
 
 			oneironaut = nixpkgs.lib.nixosSystem {
-                system = "x86_64-linux";
+				system = "x86_64-linux";
+				specialArgs = 
+				
+				{ inherit nixvim; };
+
 				modules = [
-					./modules/users.nix
+					./oneironaut/configuration.nix
 					./modules/desktop.nix
 
 					./modules/common.nix
@@ -60,18 +65,20 @@
 					./modules/font.nix
 					./modules/locale.nix
 
-
+					probe-rs-rules.nixosModules."x86_64-linux".default
 					home-manager.nixosModules.home-manager {
 						home-manager.useGlobalPkgs = true;
 						home-manager.useUserPackages = true;
-						home-manager.users.im2sleepy = import ./oneironaut/home.nix;
+						home-manager.extraSpecialArgs = { inherit inputs; };
+						home-manager.users.riccardo = import ./oneironaut/home.nix;
 					}
 				];
 			};
-            
-            dreamer = nixpkgs.lib.nixosSystem {
-                system = "x86_64-linux";
-                specialArgs = 
+
+
+			dreamer = nixpkgs.lib.nixosSystem {
+				system = "x86_64-linux";
+				specialArgs = 
 					let 
 					unstablePkgs = import unstable-nixpkgs { 
 						system = "x86_64-linux";
@@ -80,10 +87,10 @@
 				in
 				
 				{ inherit nixvim; inherit unstablePkgs; };
-                modules = [
+				modules = [
 					disko.nixosModules.disko
-                    ./dreamer/configuration.nix
-					./modules/users.nix
+						./dreamer/configuration.nix
+						./modules/users.nix
 					./modules/desktop.nix
 
 					./modules/common.nix

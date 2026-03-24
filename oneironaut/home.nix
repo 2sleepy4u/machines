@@ -9,28 +9,29 @@
 		../modules/wlogout.nix
 	];
 
-	home.stateVersion = "25.05";
+	home.stateVersion = "25.11";
 	home.sessionVariables = {
 		NIXOS_OZONE_WL = "1";
 		EDITOR = "nvim";
 	};
 	programs.home-manager.enable = true;
 
+
 	programs.brave.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform-hint=wayland";
 	programs.starship.enable = true;
 	programs.alacritty = {
 		enable = true;
-		alacritty.catppuccin.enable = true;
-		alacritty.catppuccin.flavor = "mocha";
-		alacritty.settings = {
-			window.opacity = 0.8;
-		};
+		catppuccin.enable = true;
+		catppuccin.flavor = "mocha";
+		# settings = {
+		# 	window.opacity = 0.8;
+		# };
 	};
 
 	programs.hyprlock = {
 		enable = true;
-		hyprlock.catppuccin.enable = true;
-		hyprlock.catppuccin.flavor = "mocha";
+		catppuccin.enable = true;
+		catppuccin.flavor = "mocha";
 		settings = {
 			background = [
 			{
@@ -48,7 +49,7 @@
 				dots_center = true;
 				fade_on_empty = false;
 				outline_thickness = 5;
-				placeholder_text = "<i>Password...</i>";
+				placeholder_text = "<i>Locked</i>";
 				shadow_passes = 2;
 			}
 			];
@@ -74,7 +75,13 @@
 				terminal = false;
 			};
 		};
-
+#TODO check this
+		systemDirs.data = [
+			"/var/lib/flatpak/exports/share"
+			"$HOME/.local/share/flatpak/exports/share"
+			"/usr/local/share"
+			"/usr/share"
+		];
 		configFile = {
 			"eww" = {
 				source =  ./../dotfiles/eww;
@@ -84,13 +91,25 @@
 	};
 
 	home.packages = with pkgs; [
+		(import ../scripts/fuzzy-finder.nix {
+			inherit pkgs; 
+			inherit lib;
+			dir_list = [ "~/dev" ];
+			fixed_dir_list = [ "~/"  "~/machines" ];
+		})
 		#programs
 		eww
 		brave
 		gnome-calculator
 
+		gemini-cli
+		claude-code
+
 		direnv
 		xfce.thunar
+		xwayland-satellite
+		xwayland
+		xwayland-run
 
 		gnome-network-displays
 		brightnessctl
@@ -109,12 +128,17 @@
 		wpaperd
 		playerctl
 		wofi
+		fuzzel
+		claude-code
+		# pgadmin6-desktopmode
+
+		# spotify
 
 		#work
 		slack
-		teams
 		openvpn
-		notion-app
+		openfortivpn
+		#notion-app
 		chromium
 	];
 }
