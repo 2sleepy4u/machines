@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, unstablePkgs, ... }:
 {
 	imports =
 		[ 
@@ -20,7 +20,7 @@
 
     boot.supportedFilesystems = [ "ntfs" "hfs+" "hfsplus"];
     services.xserver.videoDrivers = [ "modesetting" ];
-    boot.kernelModules = [ "i915"  "snd_hda_intel" "snd_soc_skl"];
+    boot.kernelModules = [ "i915"  "snd_hda_intel" "snd_soc_skl" "hid_multitouch" "i2c_hid_acpi"];
 	services.udev.enable = true;
 	services.udev.extraRules = ''
 		SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3748", MODE="0666", GROUP="plugdev"
@@ -28,16 +28,41 @@
 		SUBSYSTEM=="usb", ATTR{idVendor}=="0483", ATTR{idProduct}=="3752", MODE="0666", GROUP="plugdev"
 		'';
 
+
     #nix-shell -p pciutils --run "lspci -nn | grep VGA"
     #to get device id [8086:<divice ID>]
-	# boot.kernelPackages = pkgs.linuxPackages_6_15;
-    boot.kernelParams = [ "i915.force_probe=7d55" ]; 
+	# boot.kernelPackages = pkgs.linuxPackages_6_18;
+	boot.kernelPackages = pkgs.linuxPackages_6_18;
+    boot.kernelParams = [ 
+		"i915.force_probe=7d55" 
+		"i2c_hid_acpi.probe_defer=1" 
+		# "snd_hda_intel.patch=hda-jack-retask.fw" 
+	];
+
+
+	# hardware.firmware = [
+	# 	(pkgs.writeTextDir "lib/firmware/hda-jack-retask.fw" ''
+	# 	 [codec]
+	# 	 0x10ec0256 0x00000000 0
+	#
+	# 	 [pincfg]
+	# 	 0x19 0x03a11020
+	# 	 0x1b 0x90a10130
+	# 	 '')
+	# ];
+
+	# boot.extraModprobeConfig = "options snd-hda-intel model=headset-mic";
+
 	hardware.enableRedistributableFirmware = true; 
+	hardware.firmware = [
+		pkgs.sof-firmware
+	];
+
 	hardware.graphics.extraPackages = with pkgs; [ vpl-gpu-rt ];
-    services.pulseaudio.enable = false;
+    services.pulseaudio.enable = true;
 	# services.ollama.enable = true;
 	services.pipewire = {
-		enable = true;
+		enable = false;
 		alsa.enable = true;
 		pulse.enable = true;
 		jack.enable = true;
@@ -62,6 +87,17 @@
 
 	# users.defaultUserShell = pkgs.zsh;
 	virtualisation.docker.enable = true;
+
+	systemd.services.reload-touchscreen = {
+		description = "Reload touchscreen modules for Huawei MateBook 14";
+		wantedBy = [ "multi-user.target" ];
+		after = [ "systemd-modules-load.service" ];
+		serviceConfig = {
+			Type = "oneshot";
+			ExecStart = "${pkgs.bash}/bin/bash -c \"${pkgs.kmod}/bin/modprobe -r hid_multitouch; ${pkgs.kmod}/bin/modprobe -r i2c_hid_acpi; sleep 2; ${pkgs.kmod}/bin/modprobe i2c_hid_acpi; ${pkgs.kmod}/bin/modprobe hid_multitouch\"";
+			RemainAfterExit = true;
+		};
+	};
 
     hardware.ipu6.enable = true;
 	hardware.ipu6.platform = "ipu6epmtl";

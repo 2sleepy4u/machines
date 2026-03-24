@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 STATE_FILE="/tmp/battery-notify-state"
 
-#!/bin/bash
 
 # Threshold for low battery
 THRESHOLD=15

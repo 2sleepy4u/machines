@@ -139,6 +139,8 @@
 		}
 	    ];
 		plugins = {
+			typst-vim.enable = true;
+			typst-preview.enable = true;
 			vim-dadbod.enable = true;
 			vim-dadbod-ui.enable = true;
 			vim-dadbod-completion.enable = true;
@@ -284,9 +286,9 @@
 				# roc_ls.enable = true;
 				rust_analyzer = {
 					enable = true;
-					installCargo = true;
-					installRustc = true;
-					installRustfmt = true;
+					installCargo = false;
+					installRustc = false;
+					installRustfmt = false;
 				};
 			};
 		};

@@ -1,5 +1,5 @@
 (defpoll battery :interval "1m"
- "../scripts/battery.sh | cat"
+ "~/.config/eww/scripts/battery.sh | cat"
 )
 
 (defwidget w-battery []
