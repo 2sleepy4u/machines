@@ -171,6 +171,8 @@
 		}
 	    ];
 		plugins = {
+			typst-vim.enable = true;
+			typst-preview.enable = true;
 			vim-dadbod.enable = true;
 			vim-dadbod-ui.enable = true;
 			vim-dadbod-completion.enable = true;
