@@ -25,7 +25,6 @@
 (defwidget bottomstuff []
 	(box :class "bottomstuff" :orientation "h" :space-evenly true :halign "center"
 		(w-battery)
-		song
 		(w-volume)
 	)
 )

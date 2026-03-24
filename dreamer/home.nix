@@ -27,6 +27,7 @@
 	programs.brave.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform-hint=wayland";
 	programs.starship = {
 		enable = true;
+		catppuccin.enable = true;
 		enableZshIntegration = true;
 	};
 	programs.zsh = {
@@ -35,15 +36,29 @@
 		autosuggestion.enable = true;
 		syntaxHighlighting.enable = true;
 		oh-my-zsh = {
-			theme = "";
 			enable = true;
 		};
 	};
 	programs.alacritty.enable = true;
 	programs.alacritty.catppuccin.enable = true;
 	programs.alacritty.catppuccin.flavor = "mocha";
-	programs.alacritty.settings = {
-		window.opacity = 0.8;
+	# programs.alacritty.settings = {
+	# 	window.opacity = 0.8;
+	# };
+
+
+	programs.fuzzel = {
+		enable = true;
+		settings = {
+			main = {
+				terminal = "alacritty";
+				width = 40;
+			};
+			colors = {
+				background = "282a36ff";
+				text = "f8f8f2ff";
+			};
+		};
 	};
 
 	programs.hyprlock = {
@@ -141,6 +156,9 @@
 		yabridge
 		yabridgectl
 
+		libinput
+		libinput-gestures
+		typst
 
 		#programs
 		eww
@@ -176,5 +194,6 @@
 		playerctl
 		#swaybg
 		wofi
+		prismlauncher
 	];
 }

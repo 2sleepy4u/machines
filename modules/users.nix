@@ -9,7 +9,6 @@
         packages = with pkgs; [
 			sof-firmware
 			lldb
-            cargo
             gh
 			gcc
 			pciutils
