@@ -1,9 +1,8 @@
 {pkgs, ...}:
 {
 	nixpkgs.config.allowUnfree = true;
-    nixpkgs.config.pulseaudio = true;
+    #nixpkgs.config.pulseaudio = true;
 
-	programs.hyprland.enable = true;
 	programs.niri.enable = true;
 
     hardware.graphics.enable = true;
@@ -24,6 +23,7 @@
     services.tumbler.enable = true;
 
 	services.xserver.enable = true;
+	services.xserver.windowManager.openbox.enable = true;
 	services.displayManager.sddm = {
 		enable = true;
 		theme = "catppuccin-mocha-mauve";

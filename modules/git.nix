@@ -2,8 +2,8 @@
 {
 	programs.git = {
 		enable = true;
-		userName = "2sleepy4u";
-		userEmail = "riccardo.zancan00@gmail.com";
+		userName = "riccardo.zancan";
+		userEmail = "riccardo.zancan@aqc-industry.com";
 		# config = {
 		# 	diff.tool = "nvimdiff";
 		# 	# difftool.neovim.cmd = "nvim -d $LOCAL $REMOTE";

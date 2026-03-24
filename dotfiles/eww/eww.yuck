@@ -3,13 +3,20 @@
 (include "widgets/battery.yuck" )
 (include "widgets/volume.yuck" )
 
-(defwindow clock-window
-  :monitor 0
+(defwindow back-window
+  :monitor 1
   :geometry (geometry :x "50" :y "50" :width "200" :height "100")
   :stacking "bg" ; keep behind other windows
   :anchor "top right"
   :focusable false
-  (clock))
+  (box :orientation "v"
+   (clock)
+   (w-battery)
+   (w-volume)
+  )
+)
+
+
 
 
 
@@ -25,7 +32,6 @@
 (defwidget bottomstuff []
 	(box :class "bottomstuff" :orientation "h" :space-evenly true :halign "center"
 		(w-battery)
-		song
 		(w-volume)
 	)
 )
